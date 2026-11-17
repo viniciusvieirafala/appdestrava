@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DESTRAVA · App de Treino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital@0;1&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1020;--navy2:#151C38;--amber:#FFB400;--coral:#FF5A36;--cream:#FBF7F0;--ink:#141A2E;--muted:#5E6577;--line:#E6DFD2;--tint:#FFF3D1;
+--v:#FFB400;--c:#FF5A36;--m:#7C5CFF;--p:#18C29C}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--cream);color:var(--ink);font-size:15px;line-height:1.5;padding-bottom:84px}
+h1,h2,h3,.pop{font-family:Poppins,sans-serif}
+em{font-style:normal;color:var(--amber)}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px}
+header.top{background:var(--navy);color:#fff;position:relative;overflow:hidden;padding:22px 0 26px}
+header.top:before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.32),rgba(255,90,54,.1) 40%,transparent 68%)}
+.brand{position:relative;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:Poppins;font-weight:700;font-size:22px;letter-spacing:-.5px}
+.handle{font-size:12px;color:#C9CDDA;letter-spacing:1px}
+.hero{position:relative;margin-top:18px}
+.hero h1{font-size:26px;line-height:1.15}
+.hero p{color:#D7DAE5;font-size:14px;margin-top:6px}
+.stats{position:relative;display:flex;gap:10px;margin-top:18px}
+.stat{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 12px}
+.stat b{display:block;font-family:Poppins;font-size:22px;color:var(--amber);line-height:1.1}
+.stat span{font-size:11px;color:#C9CDDA;letter-spacing:.5px}
+.bar{height:8px;background:rgba(255,255,255,.12);border-radius:9px;overflow:hidden;margin-top:14px;position:relative}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--coral));border-radius:9px;transition:width .5s}
+main{padding-top:20px}
+.view{display:none}.view.on{display:block}
+.eyebrow{font-family:Poppins;font-weight:600;font-size:11px;letter-spacing:2px;color:var(--coral);margin-bottom:6px;text-transform:uppercase}
+h2{font-size:22px;line-height:1.2;margin-bottom:10px}
+h3{font-size:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.card.dark{background:var(--navy);color:#fff;border:none;position:relative;overflow:hidden}
+.card.dark p{color:#D7DAE5}
+.muted{color:var(--muted);font-size:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--amber);color:var(--navy);font-family:Poppins;font-weight:700;font-size:14px;padding:12px 18px;border-radius:12px;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.dark .btn.ghost{border-color:rgba(255,255,255,.3);color:#fff}
+.btn.coral{background:var(--coral);color:#fff}
+.btn.full{width:100%}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+input[type=text],textarea{width:100%;font:inherit;border:1.5px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+.daytag{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:52px;height:52px;border-radius:12px;background:var(--amber);color:var(--navy);font-family:Poppins;font-weight:700;font-size:20px;line-height:1;flex:none}
+.daytag small{font-size:9px;letter-spacing:1px;margin-bottom:2px}
+.today{display:flex;gap:14px;align-items:center}
+/* jornada */
+.week{margin-bottom:22px}
+.week-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.week-h h3 span{color:var(--k)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.tile{aspect-ratio:1/1;border-radius:12px;border:2px solid var(--k);background:#fff;font-family:Poppins;font-weight:700;color:var(--k);font-size:16px;display:flex;align-items:center;justify-content:center;position:relative}
+.tile.done{background:var(--k);color:#fff}
+.tile.done:after{content:"✓";position:absolute;top:3px;right:6px;font-size:11px}
+.tile.next{box-shadow:0 0 0 3px var(--cream),0 0 0 5px var(--k)}
+.w0{--k:var(--v)}.w1{--k:var(--c)}.w2{--k:var(--m)}.w3{--k:var(--p)}
+/* sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(11,16,32,.55);display:none;z-index:50;align-items:flex-end;justify-content:center}
+.sheet-bg.on{display:flex}
+.sheet{background:var(--cream);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:0 0 24px}
+.sheet-h{background:var(--navy);color:#fff;padding:20px 18px;display:flex;gap:14px;align-items:center;border-radius:22px 22px 0 0;position:sticky;top:0}
+.sheet-h h3{font-size:19px}
+.sheet-h p{font-size:13px;color:#C9CDDA}
+.x{margin-left:auto;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:18px;flex:none}
+.sheet-b{padding:16px 18px}
+.blk{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.blk .lbl{font-family:Poppins;font-weight:700;font-size:11px;letter-spacing:1.5px;color:var(--muted);margin-bottom:4px}
+.blk.ch{background:var(--tint);border-color:#F4DFA3}.blk.ch .lbl{color:#B07800}
+/* tools */
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.tool{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;text-align:left}
+.tool .ic{font-size:24px}
+.tool b{display:block;font-family:Poppins;font-size:14px;margin-top:6px}
+.tool span{font-size:12px;color:var(--muted)}
+.tool.on{border-color:var(--coral);box-shadow:0 0 0 2px var(--coral) inset}
+.panel{display:none}.panel.on{display:block}
+.timer{font-family:Poppins;font-weight:700;font-size:56px;text-align:center;line-height:1;margin:10px 0}
+.steps-dots{display:flex;gap:6px;justify-content:center;margin:8px 0 14px}
+.steps-dots i{width:28px;height:6px;border-radius:4px;background:var(--line)}
+.steps-dots i.on{background:var(--amber)}.steps-dots i.done{background:var(--coral)}
+.breath{width:200px;height:200px;margin:18px auto;border-radius:50%;background:radial-gradient(circle,var(--amber),var(--coral));display:flex;align-items:center;justify-content:center;color:#fff;font-family:Poppins;font-weight:700;font-size:20px;transform:scale(.55);transition:transform 4s ease-in-out;text-align:center}
+.bigtext{font-family:Lora;font-size:22px;line-height:1.35;text-align:center;padding:18px 6px}
+.counters{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cnt{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center}
+.cnt b{display:block;font-family:Poppins;font-size:26px;color:var(--coral)}
+.cnt span{font-size:13px;font-weight:600}
+/* avaliação */
+.q{padding:12px 0;border-bottom:1px solid var(--line)}
+.q p{font-size:14px;font-weight:500;margin-bottom:8px}
+.q .pill{font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 7px;border-radius:6px;color:#fff;background:var(--k);margin-right:6px;vertical-align:1px}
+.seg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.seg button{border:1.5px solid var(--line);border-radius:10px;padding:8px 0;font-family:Poppins;font-weight:700;background:#fff}
+.seg button.sel{background:var(--navy);color:var(--amber);border-color:var(--navy)}
+.score{display:flex;align-items:center;gap:18px}
+.ring{width:110px;height:110px;flex:none;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Poppins;font-size:28px;color:#fff}
+.pbar{margin:10px 0}
+.pbar .t{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:4px}
+.pbar .tr{height:10px;background:#EFE9DE;border-radius:9px;position:relative;overflow:hidden}
+.pbar .tr i{position:absolute;left:0;top:0;bottom:0;border-radius:9px;background:var(--k)}
+.pbar .tr i.old{background:#CFC7B8;opacity:.8}
+.level{display:inline-block;background:var(--amber);color:var(--navy);font-family:Poppins;font-weight:700;font-size:12px;padding:4px 10px;border-radius:8px;letter-spacing:.5px}
+/* comunidade */
+.grp{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.grp .e{font-size:22px;width:32px;flex:none;text-align:center}
+.grp b{font-family:Poppins;font-size:14px}
+.grp p{font-size:13px;color:var(--muted)}
+.rit{display:flex;gap:10px;padding:8px 0}
+.rit .d{flex:none;width:64px;font-family:Poppins;font-weight:700;font-size:12px;color:var(--coral)}
+.rit p{font-size:13.5px}
+/* duvidas */
+.faq{border-bottom:1px solid var(--line)}
+.faq:last-child{border:none}
+.faq summary{list-style:none;cursor:pointer;padding:13px 0;font-family:Poppins;font-weight:600;font-size:14px;display:flex;justify-content:space-between;gap:10px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--coral);font-size:18px;line-height:1}
+.faq[open] summary:after{content:"–"}
+.faq p{font-size:13.5px;color:var(--muted);padding:0 0 13px}
+.dq label{display:block;font-size:12px;font-weight:700;letter-spacing:.5px;color:var(--muted);margin:10px 0 5px}
+.dq input,.dq textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;font:inherit;font-size:14px;background:#fff;color:inherit;box-sizing:border-box}
+.dq textarea{min-height:110px;resize:vertical}
+/* nav */
+nav.bot{position:fixed;left:0;right:0;bottom:0;background:var(--navy);display:flex;justify-content:center;z-index:40;padding-bottom:env(safe-area-inset-bottom)}
+nav.bot .in{display:flex;max-width:560px;width:100%}
+nav.bot a{flex:1;min-width:0;text-align:center;color:#8E94A8;text-decoration:none;font-size:10.5px;white-space:nowrap;font-weight:600;padding:10px 0 12px}
+nav.bot a .i{display:block;font-size:20px;margin-bottom:2px;filter:grayscale(1);opacity:.7}
+nav.bot a.on{color:var(--amber)}
+nav.bot a.on .i{filter:none;opacity:1}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:60;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+.npnm{background:linear-gradient(135deg,#0B1020,#1B1440);color:#fff;border-radius:18px;padding:20px;position:relative;overflow:hidden;margin-bottom:14px}
+.npnm:after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.45),transparent 70%)}
+.tag{display:inline-block;background:var(--coral);color:#fff;font-family:Poppins;font-weight:600;font-size:10px;letter-spacing:2px;padding:4px 9px;border-radius:6px;margin-bottom:10px}
+.npnm h3{font-size:24px;line-height:1.05;margin-bottom:8px;position:relative}
+.npnm p{font-size:14px;color:#D7DAE5;position:relative}
+.kit li{margin:0 0 8px 18px;font-size:14px}
+/* ===== v2: gamificação, trilha, laboratório de voz ===== */
+.stat b{font-size:20px}
+.goal{position:relative;display:flex;align-items:center;gap:10px;margin-top:14px;font-size:12px;color:#C9CDDA}
+.goal .gl{font-family:Poppins;font-weight:700;color:var(--navy);background:var(--amber);padding:3px 8px;border-radius:7px;font-size:11px;white-space:nowrap}
+.goal .gb{flex:1;height:10px;background:rgba(255,255,255,.12);border-radius:9px;overflow:hidden}
+.goal .gb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#18C29C,#7BE0B0);border-radius:9px;transition:width .5s}
+.goal .gt{white-space:nowrap;font-weight:600}
+.xp{display:inline-block;background:#E8FBF4;color:#0E8F6E;font-family:Poppins;font-weight:700;font-size:11px;padding:3px 8px;border-radius:7px;vertical-align:2px}
+.dark .xp{background:rgba(24,194,156,.18);color:#5BE3BD}
+.center{text-align:center}
+.note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.45}
+/* trilha */
+.unit{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--k);color:#fff;border-radius:16px;padding:14px 16px;margin:8px 0 6px;box-shadow:0 5px 0 rgba(0,0,0,.12)}
+.unit.w0{color:var(--navy)}
+.unit .u-k{font-family:Poppins;font-weight:700;font-size:11px;letter-spacing:1.5px;opacity:.85}
+.unit h3{font-size:20px;line-height:1.15}
+.unit p{font-size:13px;opacity:.92}
+.u-pg{flex:none;text-align:center;background:rgba(255,255,255,.22);border-radius:12px;padding:7px 10px;font-size:18px;line-height:1.1}
+.u-pg b{display:block;font-family:Poppins;font-size:11px;margin-top:2px}
+.path{display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px 0 26px}
+.nwrap{position:relative;display:flex;flex-direction:column;align-items:center;width:130px}
+.nwrap.hb{margin-top:26px}
+.node{width:66px;height:66px;border-radius:50%;background:var(--k);color:#fff;font-family:Poppins;font-weight:700;font-size:22px;box-shadow:0 6px 0 rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;transition:transform .1s}
+.w0 .node{color:var(--navy)}
+.node:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.node.lock{background:#E3DDD1;color:#9A927F;box-shadow:0 6px 0 #CFC7B8;font-size:18px}
+.node.next{animation:pulse 1.6s infinite;outline:4px solid var(--cream);box-shadow:0 6px 0 rgba(0,0,0,.2),0 0 0 9px var(--k)}
+.node.big{width:80px;height:80px;font-size:32px}
+.nlab{font-size:11.5px;font-weight:600;color:var(--muted);margin-top:9px;text-align:center;line-height:1.2}
+.bub{position:absolute;top:-30px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 10px;font-family:Poppins;font-weight:700;font-size:11px;color:var(--ink);letter-spacing:1px;animation:bob 1.6s infinite;white-space:nowrap;z-index:2}
+@keyframes pulse{50%{transform:scale(1.06)}}
+@keyframes bob{50%{transform:translateY(-4px)}}
+/* lab */
+.tool.wide{grid-column:1/-1;background:var(--navy);color:#fff;border:none;display:flex;gap:14px;align-items:center;position:relative;overflow:hidden}
+.tool.wide:after{content:"";position:absolute;right:-50px;top:-50px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.4),transparent 70%)}
+.tool.wide .ic{font-size:34px}
+.tool.wide b{margin-top:0;font-size:16px}
+.tool.wide span{color:#C9CDDA}
+.tool.wide.on{box-shadow:0 0 0 3px var(--coral)}
+.segtab{display:flex;background:#F1ECE2;border-radius:12px;padding:4px;margin:12px 0}
+.segtab button{flex:1;padding:9px 6px;border-radius:9px;font-weight:600;font-size:13px}
+.segtab button.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.prompt{font-family:Lora;font-size:19px;line-height:1.4;text-align:center;padding:12px 6px 4px}
+.prompt small{display:block;font-family:Inter;font-size:11px;letter-spacing:1.5px;font-weight:700;color:var(--coral);margin-bottom:6px}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.chip{border:1.5px solid var(--line);border-radius:20px;padding:6px 12px;font-weight:600;font-size:13px;background:#fff}
+.chip.on{background:var(--navy);color:var(--amber);border-color:var(--navy)}
+.micwrap{text-align:center;padding:10px 0 4px}
+.mic{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--amber),var(--coral));font-size:40px;box-shadow:0 10px 24px rgba(255,90,54,.35);position:relative}
+.mic.on{animation:rec 1.2s infinite;background:linear-gradient(135deg,var(--coral),#E0301A)}
+.mic.on:after{content:"";position:absolute;inset:-9px;border-radius:50%;border:3px solid var(--coral);opacity:.45}
+.mic:disabled{opacity:.5}
+@keyframes rec{50%{transform:scale(1.06)}}
+.lvl{height:8px;background:#EFE9DE;border-radius:9px;overflow:hidden;max-width:220px;margin:16px auto 6px}
+.lvl i{display:block;height:100%;width:0;background:linear-gradient(90deg,#18C29C,var(--amber),var(--coral));transition:width .08s}
+.rtime{font-family:Poppins;font-weight:700;font-size:28px;line-height:1.2}
+.live{font-family:Lora;font-size:16px;line-height:1.5;background:var(--cream);border-radius:12px;margin-top:8px}
+.live:not(:empty){padding:12px}
+.res-top{display:flex;align-items:center;gap:16px}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:2px 0 14px}
+.mt{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center}
+.mt b{display:block;font-family:Poppins;font-size:19px;line-height:1.15}
+.mt span{font-size:11px;color:var(--ink);font-weight:700}
+.mt small{display:block;font-size:10.5px;color:var(--muted);line-height:1.25;margin-top:2px}
+.mt.g b{color:#0E9F7A}.mt.m b{color:#D48A00}.mt.b b{color:var(--coral)}.mt.n b{color:#B8B1A2}
+.fx{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.fx:last-child{border:none}
+.fx .e{font-size:20px;flex:none;width:28px;text-align:center}
+.fx b{font-family:Poppins;font-size:14px;display:block;line-height:1.3}
+.fx p{font-size:13.5px;color:var(--muted)}
+.ref{display:inline-flex;gap:5px;align-items:center;background:var(--tint);color:#8A5A00;font-weight:600;font-size:12.5px;border-radius:8px;padding:4px 8px;margin:7px 6px 0 0;line-height:1.3}
+.mini{display:inline-block;margin:7px 10px 0 0;font-family:Poppins;font-weight:700;font-size:12.5px;color:var(--coral)}
+mark.f{background:#FFD9CF;color:#B3260B;border-radius:4px;padding:0 3px;font-weight:600}
+mark.miss{background:#FFD9CF;color:#B3260B;border-radius:4px;padding:0 3px}
+mark.ok{background:#DDF6EE;color:#0B7A5E;border-radius:4px;padding:0 3px}
+.tx{font-family:Lora;font-size:15.5px;line-height:1.75}
+audio{width:100%;margin-top:10px}
+/* conquistas */
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 8px;margin-top:10px}
+.bd{text-align:center}
+.bd i{display:flex;align-items:center;justify-content:center;width:52px;height:52px;margin:0 auto 5px;border-radius:50%;background:var(--tint);font-style:normal;font-size:24px;border:2px solid #F4DFA3}
+.bd span{font-size:10.5px;font-weight:600;line-height:1.2;display:block}
+.bd.off i{filter:grayscale(1);opacity:.35;background:#F1ECE2;border-color:var(--line)}
+.bd.off span{color:#A39B8B}
+/* diagnóstico */
+.qprog{position:sticky;top:0;background:var(--cream);padding:10px 0;z-index:5}
+.qprog .tr{height:8px;background:#EFE9DE;border-radius:9px;overflow:hidden}
+.qprog .tr i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--coral));transition:width .3s}
+.qprog p{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px}
+.ah{display:flex;align-items:center;gap:8px;margin:16px 0 2px;font-family:Poppins;font-weight:700;font-size:13px}
+.ah i{width:10px;height:10px;border-radius:50%;background:var(--k);flex:none}
+.amap{border-left:5px solid var(--k)}
+.amap h3{display:flex;justify-content:space-between;gap:8px}
+.amap h3 span{color:var(--k);white-space:nowrap}
+.steps2{display:flex;gap:6px;margin-bottom:12px}
+.steps2 div{flex:1;text-align:center;font-size:11.5px;font-weight:700;color:var(--muted);padding-top:6px;border-top:4px solid var(--line)}
+.steps2 div.on{color:var(--ink);border-color:var(--coral)}
+.steps2 div.ok{color:#0E9F7A;border-color:#18C29C}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand"><div class="logo">DESTRAVA<em>.</em></div><div class="handle">@viniciusvieirafala</div></div>
+  <div class="hero"><h1 id="hello">Bora destravar?</h1><p id="hello-sub">Seu treino diário de comunicação e oratória.</p></div>
+  <div class="stats">
+    <div class="stat"><b id="s-done">0/30</b><span>DIAS FEITOS</span></div>
+    <div class="stat"><b>🔥 <span id="s-streak" style="font-size:inherit;color:inherit;letter-spacing:0">0</span></b><span>SEQUÊNCIA</span></div>
+    <div class="stat"><b>⚡ <span id="s-xp" style="font-size:inherit;color:inherit;letter-spacing:0">0</span></b><span>XP TOTAL</span></div>
+  </div>
+  <div class="goal"><span class="gl" id="g-lvl">Nível 1</span><div class="gb"><i id="g-bar"></i></div><span class="gt" id="g-txt">0/30 XP</span></div>
+</div></header>
+
+<main class="wrap">
+<!-- INICIO -->
+<section class="view" id="v-inicio">
+  <div class="card" id="name-card" style="display:none">
+    <div class="eyebrow">Antes de tudo</div>
+    <h3 style="margin-bottom:8px">Como você quer ser chamado?</h3>
+    <div class="row"><input type="text" id="name-in" placeholder="Seu nome" style="flex:1"><button class="btn" id="name-ok">Salvar</button></div>
+  </div>
+  <div class="card" id="diag-cta" style="display:none">
+    <div class="eyebrow">Passo 1 · Dia 0</div>
+    <h3>Faça seu raio-X de comunicação <span class="xp">+30 XP</span></h3>
+    <p class="muted" style="margin:4px 0 12px">18 perguntas rápidas + um teste de voz de 45 segundos. O app ouve você, aponta seus pontos fracos e mostra a página exata do e-book que resolve cada um.</p>
+    <button class="btn full" data-go="avaliacao">Começar diagnóstico</button>
+  </div>
+  <div class="eyebrow">Lição de hoje</div>
+  <div class="card dark" id="today-card"></div>
+  <div class="card" style="display:flex;gap:14px;align-items:center">
+    <div style="font-size:38px">🎙️</div>
+    <div style="flex:1"><h3>Laboratório de voz <span class="xp">+15 XP</span></h3><p class="muted">Fale 60 segundos e o app aponta seus vícios, ritmo, pausas, volume e entonação.</p></div>
+  </div>
+  <div class="row" style="margin:-4px 0 14px">
+    <button class="btn coral" style="flex:1" id="home-lab">Gravar minha fala</button>
+    <button class="btn ghost" style="flex:1" data-tool-go="aquecer">🔥 Aquecer</button>
+  </div>
+  <div class="card" id="rec-card" style="display:none"></div>
+  <div class="card" id="badges-card"></div>
+  <div class="card" id="princ-card"></div>
+  <div class="npnm">
+    <div class="tag">EM BREVE · 2027</div>
+    <h3>NEGAR PALCO<br><em>NUNCA MAIS</em></h3>
+    <p>O curso completo do Vinícius Vieira Fala, com videoaulas. Presente para você: use o cupom abaixo no lançamento e garanta um desconto exclusivo.</p><div style="position:relative;margin-top:12px;border:2px dashed var(--amber);border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px"><b style="font-family:Poppins;color:var(--amber);letter-spacing:1px;font-size:18px">VINIFALA2027</b><button class="btn" style="padding:8px 12px;font-size:12px" id="cp-copy">Copiar</button></div>
+    <div style="margin-top:12px;position:relative"><button class="btn" data-go="comunidade">Ver comunidade</button></div>
+  </div>
+</section>
+
+<!-- TRILHA -->
+<section class="view" id="v-jornada">
+  <div class="eyebrow">Sua trilha</div>
+  <h2>30 lições, 4 unidades</h2>
+  <p class="muted">Uma lição por dia. Cada lição vale <b>+20 XP</b> e mostra a página do e-book que explica a técnica.</p>
+  <div id="path"></div>
+</section>
+
+<!-- TREINAR -->
+<section class="view" id="v-treinar">
+  <div class="eyebrow">Ferramentas de treino</div>
+  <h2>Treinar agora</h2>
+  <div class="tools" id="tools">
+    <button class="tool wide" data-tool="lab"><div class="ic">🎙️</div><div style="position:relative"><b>Laboratório de voz</b><span>O app ouve você e aponta seus erros</span></div></button>
+    <button class="tool" data-tool="aquecer"><div class="ic">🔥</div><b>Aquecimento</b><span>5 etapas · +10 XP</span></button>
+    <button class="tool" data-tool="respirar"><div class="ic">🫁</div><b>Respiração 4-4-6</b><span>Acalma · +5 XP</span></button>
+    <button class="tool" data-tool="trava"><div class="ic">👅</div><b>Trava-língua</b><span>Teste com o microfone</span></button>
+    <button class="tool" data-tool="improviso"><div class="ic">🎲</div><b>Improviso</b><span>Tema + cronômetro · +10 XP</span></button>
+    <button class="tool" data-tool="vicios"><div class="ic">🚫</div><b>Caça-vícios</b><span>Contador manual · +10 XP</span></button>
+    <button class="tool" data-tool="emergencia"><div class="ic">🚨</div><b>Kit emergência</b><span>5 min antes de falar</span></button>
+  </div>
+
+  <div class="panel card" id="p-lab">
+    <h3>🎙️ Laboratório de voz</h3>
+    <div class="segtab"><button data-lm="livre" class="on">🗣️ Fala livre</button><button data-lm="leitura">📖 Leitura (dicção)</button></div>
+    <div class="prompt" id="lab-prompt"></div>
+    <div class="chips" id="lab-chips"></div>
+    <div id="lab-rec"></div>
+    <div id="lab-res"></div>
+    <p class="note">🔒 A transcrição usa o reconhecimento de voz do seu navegador (Chrome ou Safari). Sua gravação não é salva pelo app e fica só neste aparelho.</p>
+  </div>
+
+  <div class="panel card" id="p-aquecer">
+    <h3 id="aq-title">Aquecimento</h3>
+    <div class="steps-dots" id="aq-dots"></div>
+    <p id="aq-desc" class="muted" style="text-align:center;min-height:66px"></p>
+    <div class="timer" id="aq-timer">1:00</div>
+    <div class="row" style="justify-content:center"><button class="btn" id="aq-play">Iniciar</button><button class="btn ghost" id="aq-next">Pular etapa</button></div>
+  </div>
+
+  <div class="panel card" id="p-respirar">
+    <h3>Respiração 4-4-6</h3>
+    <p class="muted">Mão na barriga. Acompanhe o círculo: inspire pelo nariz, segure, solte pela boca. 5 ciclos.</p>
+    <div class="breath" id="br-c">Pronto?</div>
+    <p style="text-align:center;font-weight:600" id="br-n">Ciclo 0 de 5</p>
+    <div class="row" style="justify-content:center;margin-top:10px"><button class="btn" id="br-play">Começar</button></div>
+  </div>
+
+  <div class="panel card" id="p-trava">
+    <h3>Trava-língua</h3>
+    <p class="muted">3 vezes devagar e exagerado. Depois 3 vezes rápido, sem errar. Depois teste com o microfone: o app confere se cada palavra saiu clara.</p>
+    <div class="bigtext" id="tl-text"></div>
+    <div class="row" style="justify-content:center"><button class="btn ghost" id="tl-next">Sortear outro</button><button class="btn coral" id="tl-mic">🎙️ Testar minha dicção</button></div>
+  </div>
+
+  <div class="panel card" id="p-improviso">
+    <h3>Improviso com P.E.P.</h3>
+    <p class="muted"><b>P</b>onto (sua opinião) → <b>E</b>xemplo → <b>P</b>onto de novo.</p>
+    <div class="bigtext" id="im-text">Toque em sortear</div>
+    <div class="row" style="justify-content:center;margin-bottom:6px">
+      <button class="btn ghost" data-sec="30" id="im-30">30 s</button><button class="btn ghost" data-sec="60" id="im-60">60 s</button>
+    </div>
+    <div class="timer" id="im-timer">0:30</div>
+    <div class="row" style="justify-content:center"><button class="btn" id="im-draw">Sortear tema</button><button class="btn coral" id="im-play">Falar!</button></div>
+    <p class="center" style="margin-top:12px"><button class="mini" id="im-lab">🎙️ Quer que o app analise? Fale este tema no Laboratório →</button></p>
+  </div>
+
+  <div class="panel card" id="p-vicios">
+    <h3>Caça-vícios</h3>
+    <p class="muted" style="margin-bottom:10px">Fale 2 minutos sobre qualquer tema (ou ouça sua gravação) e toque a cada vício. Meta: trocar cada um por uma pausa. Para o app contar sozinho, use o Laboratório de voz.</p>
+    <div class="timer" id="vc-timer">2:00</div>
+    <div class="row" style="justify-content:center;margin-bottom:14px"><button class="btn" id="vc-play">Iniciar 2 min</button><button class="btn ghost" id="vc-reset">Zerar</button></div>
+    <div class="counters" id="vc-c"></div>
+    <p style="text-align:center;margin-top:12px;font-weight:600" id="vc-total">Total: 0</p>
+  </div>
+
+  <div class="panel card" id="p-emergencia">
+    <h3 style="margin-bottom:10px">Faltam 5 minutos e bateu o nervoso?</h3>
+    <ol class="kit">
+      <li><b>Respire 4-4-6</b> cinco vezes.</li>
+      <li><b>Solte o corpo:</b> chacoalhe as mãos, gire os ombros.</li>
+      <li><b>Aqueça a boca:</b> vibração de lábios e trava-língua sussurrado.</li>
+      <li><b>Diga "estou animado".</b> Troque o rótulo do que sente.</li>
+      <li><b>Lembre só a abertura.</b> O resto vem depois que você começa.</li>
+      <li><b>Ache um rosto amigo</b> na plateia e comece por ele.</li>
+    </ol>
+    <p class="muted">Deu branco? Pause, respire e diga: "Deixa eu retomar o ponto principal". <span class="ref">📖 E-book, página 37</span></p>
+    <button class="btn full" style="margin-top:12px" data-tool="respirar">Fazer a respiração agora</button>
+  </div>
+</section>
+
+<!-- DIAGNOSTICO -->
+<section class="view" id="v-avaliacao">
+  <div class="eyebrow">Diagnóstico completo</div>
+  <h2 id="av-title">Seu raio-X de comunicação</h2>
+  <div id="av-result"></div>
+  <div id="av-flow"></div>
+</section>
+
+<!-- COMUNIDADE -->
+<section class="view" id="v-comunidade">
+  <div class="eyebrow">Comunidade exclusiva</div>
+  <h2>Turma DESTRAVA</h2>
+  <p style="margin-bottom:14px">Treinar sozinho é bom. Treinar com uma turma subindo a escada junto é outro nível. Na comunidade do WhatsApp você posta seus desafios, compara seu <b>Antes × Depois</b> e recebe recados do Vini.</p>
+  <a class="btn full" id="wa-link" href="#" target="_blank" rel="noopener" style="margin-bottom:16px;text-decoration:none">Entrar na comunidade no WhatsApp</a>
+  <div class="card">
+    <h3 style="margin-bottom:4px">Os grupos</h3>
+    <div class="grp"><div class="e">📢</div><div><b>Avisos do Vini</b><p>Recados, áudios de largada da semana e novidades do Negar Palco Nunca Mais.</p></div></div>
+    <div class="grp"><div class="e">🎯</div><div><b>Desafio do Dia</b><p>O desafio de cada dia, e você responde com "✅ feito" e como foi.</p></div></div>
+    <div class="grp"><div class="e">🎤</div><div><b>Palco Aberto</b><p>Mande áudios e vídeos dos seus treinos. Aqui a turma aplaude e dá dica.</p></div></div>
+    <div class="grp"><div class="e">📈</div><div><b>Antes × Depois</b><p>Poste seu resultado do Dia 0 e do Dia 30 (tem botão de copiar na Avaliação).</p></div></div>
+    <div class="grp" style="border:none"><div class="e">💬</div><div><b>Dúvidas & Vitórias</b><p>Travou em algum exercício? Pergunta. Conseguiu apresentar sem tremer? Comemora.</p></div></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-bottom:6px">A semana da turma</h3>
+    <div class="rit"><div class="d">SEGUNDA</div><p><b>Largada:</b> áudio do Vini com o foco da semana.</p></div>
+    <div class="rit"><div class="d">TODO DIA</div><p><b>Desafio do Dia</b> às 7h. Fez? Responde com ✅.</p></div>
+    <div class="rit"><div class="d">QUARTA</div><p><b>Áudio da Coragem:</b> 30 segundos sobre um tema sorteado.</p></div>
+    <div class="rit"><div class="d">SEXTA</div><p><b>Palco Aberto:</b> vídeo de 1 minuto. Os melhores ganham destaque.</p></div>
+    <div class="rit"><div class="d">DOMINGO</div><p><b>Destaques:</b> quem mais evoluiu e quem não quebrou a sequência.</p></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-bottom:6px">As regras da turma</h3>
+    <ol class="kit"><li>Aqui ninguém ri de ninguém. Só aplaude e ajuda.</li><li>Feedback sempre com 1 elogio + 1 sugestão.</li><li>Sem spam, sem venda, sem corrente.</li><li>Errou? Ótimo. Errar treinando é o caminho.</li></ol>
+  </div>
+  <a class="btn ghost full" href="https://instagram.com/viniciusvieirafala" target="_blank" rel="noopener" style="text-decoration:none">Seguir @viniciusvieirafala</a>
+</section>
+<!-- DUVIDAS -->
+<section class="view" id="v-duvidas">
+  <div class="eyebrow">Ajuda</div>
+  <h2>Ficou com dúvida?</h2>
+  <p style="margin-bottom:14px">Veja as perguntas mais comuns. Se a sua não estiver aqui, escreva para o Vini e a resposta chega no seu e-mail.</p>
+  <div class="card">
+    <details class="faq"><summary>Onde encontro o e-book?</summary><p>O acesso chega no e-mail que você usou na compra, enviado pela Kiwify. Confira também a caixa de spam e a aba Promoções.</p></details>
+    <details class="faq"><summary>Pulei um dia. E agora?</summary><p>Sem culpa. Continue do dia em que parou. O importante é não pular dois dias seguidos.</p></details>
+    <details class="faq"><summary>Meu progresso sumiu</summary><p>O progresso (lições, XP e conquistas) fica salvo no navegador e no aparelho em que você usa o app. Se trocar de celular, de navegador ou limpar os dados, ele recomeça. Use sempre o mesmo aparelho.</p></details>
+    <details class="faq"><summary>O app não está me ouvindo</summary><p>Use o Chrome (Android) ou o Safari (iPhone) e permita o uso do microfone quando o navegador pedir. Se você bloqueou sem querer, toque no cadeado ao lado do endereço do site e libere o microfone. Fale a uns 30 cm do celular, em um lugar silencioso.</p></details>
+    <details class="faq"><summary>Como entro na comunidade?</summary><p>Na aba Turma tem o botão para entrar no WhatsApp. O link também chega no seu e-mail de compra.</p></details>
+    <details class="faq"><summary>Como uso o cupom VINIFALA2027?</summary><p>Ele dá desconto no curso Negar Palco Nunca Mais, que abre em 2027. Guarde o cupom: ele será usado no checkout do curso.</p></details>
+    <details class="faq"><summary>Quero acompanhamento individual</summary><p>O Vini tem mentoria individual. Preencha o formulário em mentoria.viniciusvieirafala.com.br e ele fala com você.</p></details>
+  </div>
+  <div class="card dq">
+    <h3 style="margin-bottom:2px">Mande sua dúvida</h3>
+    <p style="font-size:13px;color:var(--muted)">Abre o seu app de e-mail com a mensagem pronta.</p>
+    <label for="dq-nome">SEU NOME</label><input id="dq-nome" placeholder="Como posso te chamar?">
+    <label for="dq-msg">SUA DÚVIDA</label><textarea id="dq-msg" placeholder="Ex.: No Dia 8 não entendi como fazer o exercício de pausa..."></textarea>
+    <button class="btn full" id="dq-send" style="margin-top:12px">Enviar por e-mail ✉️</button>
+    <p style="font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px">Ou escreva direto para <a href="mailto:viniciusvieirafala@gmail.com" style="color:var(--coral);font-weight:600">viniciusvieirafala@gmail.com</a> · <a href="#" id="dq-copy" style="color:var(--coral);font-weight:600">copiar</a></p>
+  </div>
+</section>
+
+</main>
+
+<div class="sheet-bg" id="sheet"><div class="sheet">
+  <div class="sheet-h"><div class="daytag" id="sh-n"><small>DIA</small>01</div><div><h3 id="sh-t"></h3><p id="sh-o"></p></div><button class="x" id="sh-x" aria-label="Fechar">✕</button></div>
+  <div class="sheet-b">
+    <div class="blk"><div class="lbl">📖 NO SEU E-BOOK</div><div id="sh-ref"></div></div>
+    <div class="blk"><div class="lbl">AQUECER · 5 MIN</div>Rotina de aquecimento + 1 trava-língua. <a href="#" id="sh-aq" style="color:var(--coral);font-weight:600">Abrir aquecimento guiado →</a></div>
+    <div class="blk"><div class="lbl">TREINAR · 7 MIN</div><div id="sh-tr"></div></div>
+    <div class="blk ch"><div class="lbl">DESAFIO REAL · 3 MIN</div><div id="sh-de"></div></div>
+    <div class="blk"><div class="lbl">🎙️ O APP OUVE VOCÊ</div>Grave 60 segundos falando sobre o desafio de hoje e receba sua análise. <a href="#" id="sh-lab" style="color:var(--coral);font-weight:600">Gravar agora →</a></div>
+    <div class="blk"><div class="lbl">MINHAS ANOTAÇÕES</div><textarea id="sh-notes" placeholder="Como foi? O que você percebeu?"></textarea></div>
+    <button class="btn full" id="sh-done">Concluir lição ✓</button>
+  </div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<nav class="bot"><div class="in">
+  <a href="#inicio" data-nav="inicio"><span class="i">🏠</span>Início</a>
+  <a href="#jornada" data-nav="jornada"><span class="i">🗺️</span>Trilha</a>
+  <a href="#treinar" data-nav="treinar"><span class="i">🎤</span>Treinar</a>
+  <a href="#avaliacao" data-nav="avaliacao"><span class="i">📊</span>Raio-X</a>
+  <a href="#comunidade" data-nav="comunidade"><span class="i">👥</span>Turma</a>
+  <a href="#duvidas" data-nav="duvidas"><span class="i">💬</span>Dúvidas</a>
+</div></nav>
+<script>
+// >>> Coloque aqui o link de convite da comunidade do WhatsApp:
+const COMMUNITY_URL = "";
+const SUPPORT_EMAIL = "viniciusvieirafala@gmail.com";
+const DATA = {"weeks": [{"name": "Voz", "tag": "Destravar a boca e fazer sua voz chegar.", "days": [{"t": "Respiração de palco", "o": "Falar sem ficar sem ar.", "treino": "Depois do aquecimento, pegue qualquer texto (livro, notícia, legenda). Leia um parágrafo inteiro em voz alta, puxando o ar pela barriga antes de começar e só respirando nos pontos finais.", "desafio": "Grave um áudio de 1 minuto lendo esse texto e escute. Você respirou no lugar certo?"}, {"t": "A caneta na boca", "o": "Dicção clara, palavra por palavra.", "treino": "Leia 1 minuto de texto com uma caneta presa entre os dentes, articulando ao máximo. Tire a caneta e leia o mesmo trecho de novo. Repita 2 vezes.", "desafio": "Mande um áudio para um amigo lendo 2 trava-línguas sem errar."}, {"t": "Boca aberta, voz livre", "o": "Parar de falar \"para dentro\".", "treino": "Leia um texto exagerando todos os movimentos da boca, como se alguém fosse ler seus lábios do outro lado da sala. Depois leia normal — o \"normal\" vai sair mais claro.", "desafio": "Leia algo em voz alta para alguém da sua casa e pergunte: \"entendeu tudo?\"."}, {"t": "O volume certo", "o": "Ser ouvido sem gritar.", "treino": "Conte de 1 a 10 em 5 volumes: 1 (sussurro), 2 (conversa baixa), 3 (conversa), 4 (sala de aula), 5 (palco). Sinta a força vindo da barriga, não da garganta. Repita a frase \"Bom dia, meu nome é…\" no nível 4.", "desafio": "Faça um pedido (na lanchonete, na padaria, no balcão) no volume 4, olhando para a pessoa."}, {"t": "Ritmo e pausas", "o": "Desacelerar sem ficar chato.", "treino": "Pegue um texto curto e marque com \"/\" onde você vai pausar. Leia 20% mais devagar do que o normal, respeitando cada pausa. A pausa não é buraco: é ênfase. Depois, treine o silêncio: faça uma pausa de 3 segundos antes da frase mais importante. Vai parecer uma eternidade — e é exatamente isso que passa credibilidade.", "desafio": "Grave 1 minuto explicando um filme ou série que você gosta, com pelo menos 3 pausas de propósito."}, {"t": "A melodia da fala", "o": "Fugir da voz monótona.", "treino": "Fale a frase \"Eu não disse que você errou\" 6 vezes, dando ênfase em uma palavra diferente a cada vez. Perceba como o sentido muda só com a entonação.", "desafio": "Conte como foi o seu dia para alguém usando 3 emoções diferentes na voz: animação, suspense e surpresa."}, {"t": "Revisão da Voz", "o": "Ver o quanto você já evoluiu.", "treino": "Faça o aquecimento completo. Grave de novo o vídeo de 1 minuto se apresentando (igual ao Dia 0). Compare: respiração, volume, clareza e ritmo.", "desafio": "Escreva 1 coisa que melhorou e 1 que ainda quer melhorar. Marque o dia 7 no placar!"}]}, {"name": "Corpo", "tag": "Antes de ouvir, as pessoas veem você.", "days": [{"t": "Postura de base", "o": "Parecer (e se sentir) seguro.", "treino": "Fique em pé, pés na largura dos ombros, peso distribuído, joelhos destravados, ombros para trás e para baixo, queixo paralelo ao chão. Fique 2 minutos assim respirando fundo. Depois fale sua apresentação nessa postura.", "desafio": "Entre em um ambiente (sala, loja, casa de alguém) com essa postura e cumprimente as pessoas olhando para elas."}, {"t": "O poder do olhar", "o": "Conectar com quem escuta.", "treino": "Escolha 3 objetos no seu quarto e finja que são pessoas. Fale sobre qualquer tema e, a cada frase completa, olhe para um \"ouvinte\" diferente. Regra: uma ideia, uma pessoa.", "desafio": "Mantenha contato visual do começo ao fim em 3 conversas hoje."}, {"t": "O que fazer com as mãos", "o": "Gestos que ajudam, não que atrapalham.", "treino": "Seus gestos moram na \"zona de comunicação\": entre a cintura e os ombros. Explique o caminho da sua casa até a escola ou trabalho usando as mãos para mostrar direções e tamanhos. Proibido: bolso, braço cruzado, mão para trás.", "desafio": "Grave 1 minuto falando e conte quantas vezes você escondeu ou travou as mãos."}, {"t": "Rosto que fala junto", "o": "Expressão combinando com a mensagem.", "treino": "Na frente do espelho, fale a mesma frase três vezes: séria, empolgada e preocupada. O rosto precisa mudar junto com a voz. Termine falando sua apresentação com um sorriso leve.", "desafio": "Cumprimente 3 pessoas hoje com um sorriso verdadeiro antes de falar."}, {"t": "Movimento com intenção", "o": "Usar o espaço a seu favor.", "treino": "Escolha 3 pontos no quarto. Fale sobre 3 ideias diferentes, uma em cada ponto. Ande só na transição entre as ideias e fique parado quando estiver dizendo algo importante. Nada de \"sambar\" de um lado para o outro.", "desafio": "Em uma conversa em pé, perceba se você fica balançando. Se sim, firme os pés."}, {"t": "Adeus, vícios de linguagem", "o": "Trocar o \"né\" pelo silêncio.", "treino": "Grave 2 minutos falando livremente. Escute e conte quantos \"né\", \"tipo\", \"tá\", \"então\" e \"ééé\" apareceram. Grave de novo trocando cada vício por uma pausa curta.", "desafio": "Teste do WhatsApp: grave um áudio de 1 minuto como se estivesse contando uma história para o seu chefe ou diretor. Escute e conte quantos \"né\" e \"éé\" saíram. Grave de novo trocando cada um por uma pausa e compare."}, {"t": "Revisão do Corpo", "o": "Juntar voz e corpo.", "treino": "Faça o aquecimento. Grave um vídeo de 2 minutos em pé falando sobre algo que você ama. Avalie: postura, olhar para a câmera, mãos na zona, expressão e vícios.", "desafio": "Compare com o vídeo do Dia 7. Marque o dia 14 no placar!"}]}, {"name": "Mente", "tag": "O medo não vai embora. Ele vai diminuindo.", "days": [{"t": "Encare o monstro", "o": "Vai com medo, mas vai preparado.", "treino": "Escreva três respostas: (1) o pior que pode acontecer se eu falar em público; (2) o que é mais provável que aconteça; (3) o que eu faria se o pior acontecesse. Leia em voz alta.", "desafio": "Conte para alguém de confiança qual é o seu maior medo ao falar. Lembre: o medo vai existir. Você vai com medo mesmo."}, {"t": "Nervoso = animado", "o": "Usar a adrenalina a seu favor.", "treino": "Nervosismo e empolgação são quase a mesma coisa no corpo. Em vez de tentar \"se acalmar\", treine dizer em voz alta: \"Eu estou animado!\". Faça a respiração 4-4-6 e repita 3 vezes antes de falar sua apresentação.", "desafio": "Antes de qualquer situação que te deixe tenso hoje, respire e diga (mesmo baixinho): \"estou animado\"."}, {"t": "Sua escada da coragem", "o": "Planejar a exposição aos poucos.", "treino": "Liste 10 situações de fala, da mais fácil (ex.: mandar áudio para amigo) até a mais difícil (ex.: apresentar para 50 pessoas). Esse é o seu mapa para as próximas semanas.", "desafio": "Faça hoje o degrau 1 da sua escada."}, {"t": "Levante a mão", "o": "Ser ouvido em grupo.", "treino": "Treine em voz alta 3 perguntas ou comentários que você poderia fazer na sua próxima aula, reunião ou encontro. Comece sempre com uma frase de entrada: \"Posso fazer uma pergunta?\".", "desafio": "Faça 1 pergunta ou comentário em público hoje (aula, reunião, grupo, culto, curso)."}, {"t": "Fale com um estranho", "o": "Perder o medo de iniciar conversas.", "treino": "Treine 3 aberturas simples: pedir uma informação, fazer um elogio sincero, comentar algo do ambiente. Fale cada uma em voz alta, com postura e olhar.", "desafio": "Puxe uma conversa curta com alguém que você não conhece (atendente, colega novo, vizinho)."}, {"t": "Errei. E daí?", "o": "Saber se recuperar no meio da fala.", "treino": "Fale 1 minuto sobre um tema e, no meio, \"perca o fio\" de propósito. Pause, respire e use uma frase de resgate: \"Deixa eu voltar ao ponto principal…\" ou \"Resumindo o que eu quero dizer…\". Repita 3 vezes.", "desafio": "Lembre: o julgamento está na sua cabeça. O público quase nunca sabe o que você ia dizer. Só você sabe que \"errou\"."}, {"t": "Revisão da Mente", "o": "Subir mais alto na escada.", "treino": "Faça o aquecimento e escolha os degraus 3 ou 4 da sua escada da coragem. Prepare-se usando tudo que aprendeu até aqui.", "desafio": "Grave um story ou vídeo curto de 30 segundos falando sobre algo que aprendeu esta semana. Postar é opcional. Gravar é obrigatório!"}]}, {"name": "Palco", "tag": "Agora a gente junta tudo e sobe no palco.", "days": [{"t": "A fala em 3 partes", "o": "Nunca mais \"ficar perdido\".", "treino": "Toda fala tem: abertura (prender a atenção), meio (até 3 pontos) e fechamento (o que você quer que a pessoa leve). Escolha um tema da página de improviso e fale 1 minuto nessa estrutura.", "desafio": "Organize nessa estrutura a próxima coisa importante que você vai falar (um trabalho, uma reunião, um pedido)."}, {"t": "Ganchos de abertura", "o": "Os primeiros 10 segundos.", "treino": "Para o mesmo tema, crie 4 aberturas diferentes: uma pergunta, um dado curioso, uma mini-história e uma frase de impacto. Fale todas em voz alta e escolha a melhor.", "desafio": "Comece uma conversa ou mensagem de voz hoje com um gancho, em vez de \"então…\"."}, {"t": "Conte uma história", "o": "Fazer as pessoas sentirem.", "treino": "Use a estrutura Situação → Conflito → Virada → Lição. Escolha um momento real da sua vida e conte em até 90 segundos. Grave.", "desafio": "Conte essa história para alguém pessoalmente."}, {"t": "Improviso sem pânico", "o": "Falar bem sem preparar.", "treino": "Use o método P.E.P.: Ponto (sua opinião), Exemplo (um caso ou motivo), Ponto de novo (repita a ideia). Sorteie 5 temas da página de improviso e fale 30 segundos de cada.", "desafio": "Quando alguém te perguntar algo hoje, responda usando P.E.P."}, {"t": "Seu pitch de 60 segundos", "o": "Saber se apresentar em qualquer lugar.", "treino": "Escreva e treine: quem eu sou → o que eu faço/estudo → do que eu gosto ou o que busco → uma frase que fique na memória. Fale em pé, cronometrando 60 segundos.", "desafio": "Use o seu pitch para se apresentar a alguém novo (curso, evento, trabalho, rede social)."}, {"t": "Fechamentos memoráveis", "o": "Terminar forte, não \"é isso\".", "treino": "Um bom fechamento tem: resumo em uma frase + chamada (o que fazer agora) + frase final. Crie 3 fechamentos para a fala do Dia 22 e treine o melhor.", "desafio": "Proibido terminar qualquer fala hoje com \"é isso, gente\". Feche com intenção."}, {"t": "Ensaio de verdade", "o": "Treinar como se fosse o dia.", "treino": "Escolha uma apresentação real que você tem (ou invente uma de 3 minutos). Ensaie 3 vezes em pé, em voz alta, cronometrando. Na terceira, grave.", "desafio": "Assista à gravação e anote 2 ajustes. Faça o 4º ensaio com eles."}, {"t": "Plateia de verdade", "o": "Falar para gente de carne e osso.", "treino": "Faça o aquecimento e apresente sua fala de 3 minutos para família ou amigos. Antes, explique: \"quero um elogio e uma sugestão de melhoria\".", "desafio": "Agradeça o feedback sem se justificar. Só anote e diga \"obrigado\"."}, {"t": "O grande dia", "o": "Ver o quanto você destravou.", "treino": "Aquecimento completo. Grave um vídeo final de 3 minutos sobre o tema que quiser, usando tudo: voz, corpo, estrutura, gancho e fechamento. Depois assista ao vídeo do Dia 0.", "desafio": "Poste (se quiser) e me marque no @viniciusvieirafala. Eu quero ver a sua evolução!"}]}], "tl": ["O rato roeu a roupa do rei de Roma.", "Três pratos de trigo para três tigres tristes.", "O peito do pé de Pedro é preto.", "A aranha arranha a rã. A rã arranha a aranha.", "Num ninho de mafagafos há sete mafagafinhos.", "Bagre branco, branco bagre.", "O sabiá não sabia que o sábio sabia que o sabiá não sabia assobiar.", "Pedro pregou um prego na porta preta.", "Disseram que na minha rua tem paralelepípedo feito de paralelogramos.", "Quem a paca cara compra, paca cara pagará."], "temas": ["Uma comida que eu defenderia até o fim", "Se eu pudesse mudar uma regra da escola/trabalho", "O melhor conselho que já recebi", "Redes sociais: mais ajudam ou atrapalham?", "Uma música que marcou minha vida", "O que eu faria com R$ 1 milhão", "Um lugar que todo mundo deveria conhecer", "Por que vale a pena aprender um instrumento", "Uma habilidade que a escola deveria ensinar", "Meu maior orgulho até hoje", "Celular na sala de aula: sim ou não?", "Uma pessoa que me inspira", "O que é ser um bom amigo", "Um filme que eu indicaria para todo mundo", "Algo que eu aprendi errando", "Como seria o meu dia perfeito", "Uma invenção que mudou o mundo", "O que eu queria ter ouvido aos 12 anos", "Trabalhar com o que ama ou ganhar bem?", "Um medo que eu já venci"], "items": ["Falo sem medo na frente da turma/equipe", "Minha voz sai firme e com bom volume", "As pessoas entendem tudo que eu falo (dicção)", "Sei o que fazer com as mãos e o corpo", "Consigo olhar nos olhos enquanto falo", "Organizo bem as ideias antes de falar", "Consigo falar de improviso", "Uso poucos vícios (\"né\", \"tipo\", \"ééé\")"]};
+const DAYS=[];DATA.weeks.forEach((w,wi)=>w.days.forEach(d=>DAYS.push({...d,w:wi})));
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const fmt=s=>Math.floor(s/60)+":"+String(Math.max(0,s)%60).padStart(2,"0");
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function ymd(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+const today=()=>ymd(new Date());
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2600)}
+
+// ---------- e-book: onde está cada coisa
+const DAY_PAGE=d=>d<=4?49:d<=7?50:d<=11?51:d<=14?52:d<=18?53:d<=21?54:d<=26?55:56;
+const DAY_TH={1:[23,"A sua voz"],2:[43,"Banco de trava-línguas"],3:[23,"A sua voz"],4:[23,"A sua voz"],5:[21,"O silêncio é seu aliado"],6:[26,"Tons de voz"],7:[25,"As 4 vozes"],8:[30,"Postura e posicionamento de palco"],9:[27,"Contato visual"],10:[29,"Gestos: suas mãos também falam"],11:[29,"Gestos e expressão"],12:[30,"Postura e posicionamento de palco"],13:[24,"Vícios de linguagem: o teste do WhatsApp"],14:[31,"Os erros de palco"],15:[14,"Por que a gente trava"],16:[17,"O truque do “estou animado”"],17:[37,"Nervosismo e julgamento"],18:[20,"Quem não fala, perde"],19:[15,"O efeito holofote"],20:[16,"A ilusão de transparência"],21:[19,"Os 7 princípios"],22:[34,"Histórias e estruturas"],23:[45,"O gancho"],24:[34,"Histórias e estruturas"],25:[57,"20 temas para improviso"],26:[10,"Ethos, Pathos e Logos"],27:[34,"Histórias e estruturas"],28:[42,"Aquecimento de 5 minutos"],29:[31,"Os erros de palco"],30:[37,"Nervosismo e julgamento"]};
+const REF={voz:[23,"A sua voz"],vozes:[25,"As 4 vozes: ouro, prata, bronze e veludo"],tons:[26,"Tons de voz: a melodia que dá sentido"],vicios:[24,"Vícios de linguagem: o teste do WhatsApp"],silencio:[21,"O silêncio é seu aliado"],trava:[43,"Banco de trava-línguas"],aquec:[42,"Aquecimento de 5 minutos"],nervo:[37,"Nervosismo e julgamento: a hora H"],estrut:[34,"Histórias e estruturas"],analog:[33,"Analogias"],improv:[57,"20 temas para improviso"],holofote:[15,"O efeito holofote"]};
+const refHTML=r=>`<span class="ref">📖 Página ${r[0]} · ${esc(r[1])}</span>`;
+
+const AREAS=[
+ {k:"voz",n:"Voz e volume",c:"#FFB400",q:["Minha voz sai firme e com bom volume","Consigo falar alto sem gritar nem ficar rouco"],refs:[[23,"A sua voz"],[25,"As 4 vozes: ouro, prata, bronze e veludo"]],tool:"respirar",tn:"Respiração 4-4-6",days:[1,4]},
+ {k:"diccao",n:"Dicção",c:"#F08A24",q:["As pessoas entendem tudo o que eu falo","Não como o final das palavras nem embolo as sílabas"],refs:[[23,"A sua voz (articulação)"],[43,"Banco de trava-línguas"],[42,"Aquecimento de 5 minutos"]],tool:"trava",tn:"Trava-língua com microfone",days:[2,3]},
+ {k:"ritmo",n:"Ritmo e pausas",c:"#FF5A36",q:["Falo num ritmo bom, sem atropelar as palavras","Uso pausas sem medo do silêncio"],refs:[[21,"O silêncio é seu aliado"],[26,"Tons de voz: a melodia que dá sentido"]],tool:"lab",tn:"Laboratório de voz",days:[5,6]},
+ {k:"vicios",n:"Vícios de linguagem",c:"#E0457B",q:["Uso poucos “né”, “tipo”, “ééé”","Quando não sei o que dizer, faço uma pausa em vez de enrolar"],refs:[[24,"Vícios de linguagem: o teste do WhatsApp"]],tool:"lab",tn:"Laboratório de voz",days:[13]},
+ {k:"corpo",n:"Corpo e olhar",c:"#7C5CFF",q:["Sei o que fazer com as mãos e o corpo quando falo","Consigo olhar nos olhos enquanto falo"],refs:[[27,"Contato visual"],[28,"A técnica das 3 pessoas"],[29,"Gestos"],[30,"Postura e posicionamento de palco"]],tool:"emergencia",tn:"Kit emergência",days:[8,9,10]},
+ {k:"mente",n:"Nervosismo e mente",c:"#4C6FFF",q:["Consigo controlar o nervosismo antes de falar","Não fico travado pelo medo do julgamento"],refs:[[14,"Por que a gente trava"],[15,"O efeito holofote"],[17,"O truque do “estou animado”"],[37,"Nervosismo e julgamento"]],tool:"respirar",tn:"Respiração 4-4-6",days:[15,16,20]},
+ {k:"estrutura",n:"Clareza e improviso",c:"#18C29C",q:["Organizo bem as ideias antes de falar","Consigo falar de improviso sem me perder"],refs:[[34,"Histórias e estruturas"],[33,"Analogias"],[57,"20 temas para improviso"]],tool:"improviso",tn:"Improviso com P.E.P.",days:[22,24,25]},
+ {k:"conexao",n:"Conexão e persuasão",c:"#0FA3B1",q:["Crio conexão rápido com quem está me ouvindo","Sei defender uma ideia e convencer"],refs:[[10,"Ethos, Pathos e Logos"],[35,"Rapport"],[32,"Perguntas direcionadas"],[36,"Ferramentas da PNL"]],tool:"improviso",tn:"Improviso com P.E.P.",days:[19,26]},
+ {k:"camera",n:"Câmera e redes",c:"#B4529E",q:["Fico à vontade gravando vídeos","Sei prender a atenção nos primeiros segundos"],refs:[[45,"O gancho"],[46,"Comece pelo COMO"],[47,"Tudo comunica"]],tool:"lab",tn:"Laboratório de voz",days:[23]}
+];
+const QN=AREAS.length*2;
+
+// ---------- storage (seguro)
+const KEY="destrava_v1";
+let S={name:"",done:{},notes:{},dates:{},evals:[],diags:[],xp:0,xpDays:{},badges:{},labs:[],dayXP:{}};
+try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+["done","notes","dates","xpDays","badges","dayXP"].forEach(k=>{if(!S[k]||typeof S[k]!=="object")S[k]={}});
+["evals","diags","labs"].forEach(k=>{if(!Array.isArray(S[k]))S[k]=[]});
+if(typeof S.xp!=="number")S.xp=0;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+// ---------- XP, níveis, sequência, conquistas
+const GOAL=30;
+const LV=[[0,"Travado"],[60,"Aquecendo"],[150,"Soltando a voz"],[300,"Falante"],[500,"Comunicador"],[800,"Orador"],[1200,"Palestrante"],[1800,"Mestre do palco"]];
+function lvl(xp){let i=0;LV.forEach((l,k)=>{if(xp>=l[0])i=k});return{n:i+1,name:LV[i][1]}}
+const BADGES={primeira:["🎙️","Primeira gravação"],diag:["🩺","Raio-X feito"],meta:["🎯","Meta do dia"],fogo3:["🔥","3 dias seguidos"],fogo7:["🔥","7 dias seguidos"],zero:["🚫","Zero vícios"],diccao:["👅","Dicção afiada"],nota80:["⭐","Nota 80+ na fala"],s1:["🎤","Unidade Voz"],s2:["🧍","Unidade Corpo"],s3:["🧠","Unidade Mente"],s4:["🏟️","Unidade Palco"],trinta:["🏆","30 dias"]};
+function activeDays(){const s=new Set(Object.keys(S.xpDays).filter(k=>S.xpDays[k]>0));Object.values(S.dates).forEach(d=>d&&s.add(String(d).slice(0,10)));return s}
+function calStreak(){const s=activeDays();const d=new Date();if(!s.has(ymd(d)))d.setDate(d.getDate()-1);let n=0;while(s.has(ymd(d))){n++;d.setDate(d.getDate()-1)}return n}
+let bq=[];
+function award(id){if(S.badges[id]||!BADGES[id])return;S.badges[id]=today();save();bq.push(id);if(bq.length===1)flushBadges()}
+function flushBadges(){if(!bq.length)return;setTimeout(()=>{const id=bq.shift();if(!id)return;toast(`🏅 Conquista desbloqueada: ${BADGES[id][1]}`);renderBadges();flushBadges()},2700)}
+function checkBadges(){const st=calStreak();if(st>=3)award("fogo3");if(st>=7)award("fogo7");let i=0;DATA.weeks.forEach((w,wi)=>{let all=true;w.days.forEach(()=>{i++;if(!S.done[i])all=false});if(all)award("s"+(wi+1))});if(Object.keys(S.done).length>=30)award("trinta")}
+function addXP(n,why){const before=lvl(S.xp).n,t=today(),prev=S.xpDays[t]||0;S.xp+=n;S.xpDays[t]=prev+n;save();
+  let msg=`+${n} XP · ${why}`;if(prev<GOAL&&S.xpDays[t]>=GOAL){msg+=" · 🎯 Meta do dia!";award("meta")}
+  const l=lvl(S.xp);if(l.n>before)msg=`⬆️ Subiu para o Nível ${l.n}: ${l.name}! (+${n} XP)`;
+  checkBadges();renderHeader();renderBadges();toast(msg)}
+
+// ---------- header
+function nextDay(){for(let i=1;i<=30;i++)if(!S.done[i])return i;return 0}
+function renderHeader(){
+  const done=Object.keys(S.done).length;$("#s-done").textContent=done+"/30";$("#s-streak").textContent=calStreak();$("#s-xp").textContent=S.xp;
+  const l=lvl(S.xp),tx=S.xpDays[today()]||0;$("#g-lvl").textContent=`Nível ${l.n} · ${l.name}`;$("#g-txt").textContent=`Meta do dia ${Math.min(tx,GOAL)}/${GOAL} XP`;$("#g-bar").style.width=Math.min(100,tx/GOAL*100)+"%";
+  $("#hello").innerHTML=S.name?`Fala, ${esc(S.name)}! <em>Bora destravar?</em>`:"Bora <em>destravar</em>?";
+  $("#hello-sub").textContent=done===30?"Você completou os 30 dias. Refaça o raio-X e compare!":tx>=GOAL?"Meta do dia batida. Amanhã tem mais! 🔥":done?`Você já fez ${done} lição${done>1?"ões":""}. Não quebra a sequência.`:"Seu treino diário de comunicação e oratória.";
+}
+
+// ---------- diagnóstico: cálculo
+function lastDiag(){return S.diags[S.diags.length-1]}
+function oldScore(a){const tot=Math.round((a.reduce((x,y)=>x+y,0)-12)/48*100);return tot}
+function level(t){if(t<30)return["TRAVADO","Seu medo ainda manda mais que você. Normal: é exatamente aqui que o treino faz mais diferença."];if(t<55)return["EM AQUECIMENTO","Você já tem base, mas trava em alguns pontos. 30 dias de constância vão mudar seu jogo."];if(t<80)return["DESTRAVANDO","Você se comunica bem e está pronto para lapidar. Foque nos seus pontos mais fracos."];return["PALCO LIBERADO","Você já fala com segurança. Agora é refinar e se expor a palcos maiores."]}
+function weakest(d,n){return AREAS.map((a,i)=>({a,i,v:d.areas[a.k]})).sort((x,y)=>x.v-y.v).slice(0,n)}
+
+// ---------- início
+function renderHome(){
+  $("#name-card").style.display=S.name?"none":"block";
+  $("#diag-cta").style.display=S.diags.length?"none":"block";
+  const n=nextDay(),tc=$("#today-card");
+  if(n){const d=DAYS[n-1];tc.innerHTML=`<div class="today"><div class="daytag"><small>DIA</small>${String(n).padStart(2,"0")}</div><div><div style="font-size:11px;letter-spacing:1.5px;color:#C9CDDA;font-weight:600">UNIDADE ${d.w+1} · ${DATA.weeks[d.w].name.toUpperCase()}</div><h3 style="font-size:19px">${d.t} <span class="xp">+20 XP</span></h3><p style="font-size:13px">${d.o}</p></div></div><button class="btn full" style="margin-top:14px" onclick="openDay(${n})">Começar lição</button>`}
+  else tc.innerHTML=`<h3 style="font-size:20px">Missão cumprida! 🏆</h3><p style="margin:6px 0 12px">Você completou os 30 dias. Refaça o raio-X e poste seu Antes × Depois na comunidade.</p><button class="btn" onclick="go('avaliacao')">Refazer raio-X</button>`;
+  const ld=lastDiag(),rc=$("#rec-card");
+  if(ld){const w=weakest(ld,1)[0];const a=w.a;rc.style.display="block";rc.style.borderLeft=`5px solid ${a.c}`;
+    rc.innerHTML=`<div class="eyebrow">Seu foco agora</div><h3>${a.n} <span style="color:${a.c}">${w.v}%</span></h3><p class="muted" style="margin-top:4px">É o seu ponto mais fraco no raio-X. Comece por aqui:</p>${a.refs.slice(0,2).map(refHTML).join("")}<div><button class="mini" onclick="openTool('${a.tool}')">🎯 ${a.tn} →</button><button class="mini" onclick="openDay(${a.days[0]})">🗓️ Lição do Dia ${a.days[0]} →</button></div>`}
+  else rc.style.display="none";
+}
+function renderBadges(){const ids=Object.keys(BADGES),got=ids.filter(i=>S.badges[i]).length;
+  $("#badges-card").innerHTML=`<div class="eyebrow">Conquistas · ${got}/${ids.length}</div><div class="badges">${ids.map(i=>`<div class="bd ${S.badges[i]?"":"off"}"><i>${BADGES[i][0]}</i><span>${BADGES[i][1]}</span></div>`).join("")}</div>`}
+
+const PRINC=[["Tá com medo? Vai com medo.","O medo vai existir. Não espere ele passar para agir. Mas vai preparado: aquecimento, estrutura e ensaio.","Medo + preparo = coragem."],
+["O julgamento está na sua cabeça.","As pessoas não estão prestando 100% de atenção em você. Elas têm a vida delas e estão pensando no que elas vão falar.","Ninguém lembra do seu erro tanto quanto você."],
+["Quem julga, se projeta.","Quem te julga está mostrando o que ele não tem ou não consegue fazer, e joga isso em você. Fique despreocupado.","A crítica diz mais sobre quem fala do que sobre você."],
+["Quem não fala, perde.","Cada vez que você deixa de falar, perde uma nota, uma venda, uma amizade, uma oportunidade que não volta.","O silêncio também tem preço."],
+["Comunicação é treino, não dom.","Eu era tímido. Treinei, e minhas vendas, minha vida pessoal, tudo melhorou. Com você vai ser igual.","Apareça todo dia. O resultado vem."],
+["O silêncio é seu aliado.","Na hora, a pausa parece que vai te matar. Mas quem tem coragem de ficar em silêncio passa segurança e credibilidade. Não é errado: tem que ter.","Quem pausa, manda na sala."],
+["Fale com intenção.","Qual é o propósito da sua fala? Use a linguagem do seu público. Sem conexão, não adianta vocabulário de dicionário.","Comunicação boa é a que chega em quem ouve."]];
+let pI=0;
+function renderPrinc(){const p=PRINC[pI];$("#princ-card").innerHTML=`<div class="eyebrow">Método Vini · princípio ${pI+1}/7</div><h3 style="font-size:18px;margin-bottom:4px">${p[0]}</h3><p style="font-size:14px">${p[1]}</p><p style="font-family:Lora;font-style:italic;color:var(--coral);margin-top:6px">→ ${p[2]}</p><button class="btn ghost" style="margin-top:10px" id="princ-next">Próximo princípio</button>`;$("#princ-next").onclick=()=>{pI=(pI+1)%7;renderPrinc()}}
+
+// ---------- trilha
+const OFFS=[0,50,76,50,0,-50,-76,-50];
+const WCOL=["#FFB400","#FF5A36","#7C5CFF","#18C29C"];
+function renderPath(){const nd=nextDay();let h="",i=0;
+  DATA.weeks.forEach((w,wi)=>{const first=i+1,last=i+w.days.length;let cnt=0;for(let k=first;k<=last;k++)if(S.done[k])cnt++;
+    const pg=DAY_PAGE(first)===DAY_PAGE(last)?DAY_PAGE(first):DAY_PAGE(first)+"–"+DAY_PAGE(last);
+    h+=`<div class="unit w${wi}" style="--k:${WCOL[wi]}"><div><div class="u-k">UNIDADE ${wi+1} · ${cnt}/${w.days.length} LIÇÕES</div><h3>${w.name}</h3><p>${w.tag}</p></div><div class="u-pg">📖<b>p. ${pg}</b></div></div><div class="path w${wi}" style="--k:${WCOL[wi]}">`;
+    w.days.forEach((d,k)=>{i++;const isLast=k===w.days.length-1;const st=S.done[i]?"done":i===nd?"next":(nd&&i>nd)?"lock":"done";
+      const ic=S.done[i]?(isLast?(i===30?"👑":"🏆"):"✓"):st==="lock"?(isLast?(i===30?"👑":"🏆"):"🔒"):(isLast?(i===30?"👑":"🏆"):String(i));
+      h+=`<div class="nwrap ${st==="next"?"hb":""}" style="transform:translateX(${OFFS[(i-1)%8]}px)">${st==="next"?'<div class="bub">COMEÇAR</div>':""}<button class="node ${st} ${isLast?"big":""}" onclick="tapNode(${i})" aria-label="Dia ${i}">${ic}</button><div class="nlab">Dia ${i} · ${esc(d.t)}</div></div>`});
+    h+="</div>"});
+  $("#path").innerHTML=h}
+function tapNode(n){const nd=nextDay();if(!S.done[n]&&nd&&n>nd){toast(`🔒 Complete a lição do Dia ${nd} primeiro`);return}openDay(n)}
+let cur=0;
+function openDay(n){cur=n;const d=DAYS[n-1];$("#sh-n").innerHTML=`<small>DIA</small>${String(n).padStart(2,"0")}`;$("#sh-t").textContent=d.t;$("#sh-o").textContent=d.o;$("#sh-tr").textContent=d.treino;$("#sh-de").textContent=d.desafio;$("#sh-notes").value=S.notes[n]||"";
+  const th=DAY_TH[n];$("#sh-ref").innerHTML=`Lição completa: <b>Semana ${d.w+1}, página ${DAY_PAGE(n)}</b>.<br>A teoria por trás: <b>página ${th[0]}</b> · ${esc(th[1])}.`;
+  $("#sh-done").textContent=S.done[n]?"Marcar como não feita":(S.dayXP[n]?"Concluir lição ✓":"Concluir lição ✓  +20 XP");$("#sh-done").className=S.done[n]?"btn ghost full":"btn full";$("#sheet").classList.add("on")}
+function closeDay(){S.notes[cur]=$("#sh-notes").value;save();$("#sheet").classList.remove("on")}
+$("#sh-x").onclick=closeDay;$("#sheet").onclick=e=>{if(e.target.id==="sheet")closeDay()};
+$("#sh-done").onclick=()=>{S.notes[cur]=$("#sh-notes").value;const n=cur;
+  if(S.done[n]){delete S.done[n];save();closeDay();renderAll();return}
+  S.done[n]=1;S.dates[n]=today();save();closeDay();
+  if(!S.dayXP[n]){S.dayXP[n]=1;addXP(20,n===30?"🏆 30 dias concluídos!":`Lição do Dia ${n}`)}else{checkBadges();toast(`Dia ${n} concluído! 🔥`)}
+  renderAll()};
+$("#sh-aq").onclick=e=>{e.preventDefault();closeDay();openTool("aquecer")};
+$("#sh-lab").onclick=e=>{e.preventDefault();const d=DAYS[cur-1];closeDay();openLab("livre",{t:"Desafio do Dia "+cur,p:d.desafio})};
+
+// ---------- tools
+function openTool(t){go("treinar");$$(".tool").forEach(b=>b.classList.toggle("on",b.dataset.tool===t));$$(".panel").forEach(p=>p.classList.toggle("on",p.id==="p-"+t));setTimeout(()=>{const p=$("#p-"+t);if(p)p.scrollIntoView({behavior:"smooth",block:"start"})},60)}
+$$("[data-tool]").forEach(b=>b.onclick=()=>openTool(b.dataset.tool));
+$$("[data-tool-go]").forEach(b=>b.onclick=()=>openTool(b.dataset.toolGo));
+
+const AQ=[["Respiração 4-4-6","Mão na barriga. Inspire 4 tempos enchendo a barriga, segure 4, solte pela boca em 6."],["Soltar o rosto","Boceje bem grande 3 vezes. Massageie bochechas e mandíbula em círculos."],["Vibração de lábios","\"Brrrrr\" com lábios soltos, subindo e descendo o tom. Depois \"trrrr\" com a língua."],["Vogais exageradas","A · E · I · O · U abrindo a boca ao máximo. Devagar, depois rápido. 3 rodadas."],["Trava-língua","__TL__"]];
+let aqI=0,aqT=60,aqRun=null;
+function aqRender(){const[t,d]=AQ[aqI];$("#aq-title").textContent=`${aqI+1}/5 · ${t}`;$("#aq-desc").textContent=d==="__TL__"?"Fale 3x devagar e 3x rápido: “"+DATA.tl[Math.floor(Math.random()*DATA.tl.length)]+"”":d;$("#aq-timer").textContent=fmt(aqT);$("#aq-dots").innerHTML=AQ.map((_,i)=>`<i class="${i<aqI?"done":i===aqI?"on":""}"></i>`).join("")}
+function aqStop(){clearInterval(aqRun);aqRun=null;$("#aq-play").textContent="Continuar"}
+function aqNext(auto){if(aqI<4){aqI++;aqT=60;aqRender()}else{const ran=!!aqRun||auto;aqStop();aqI=0;aqT=60;aqRender();$("#aq-play").textContent="Iniciar";if(ran)addXP(10,"Aquecimento completo 🔥");else toast("Aquecimento reiniciado")}}
+$("#aq-play").onclick=()=>{if(aqRun){aqStop();return}$("#aq-play").textContent="Pausar";aqRun=setInterval(()=>{aqT--;$("#aq-timer").textContent=fmt(aqT);if(aqT<=0){beep();aqNext(true)}},1000)};
+$("#aq-next").onclick=()=>{aqNext(false)};
+
+let brRun=false;
+$("#br-play").onclick=async()=>{if(brRun)return;brRun=true;const c=$("#br-c");const w=ms=>new Promise(r=>setTimeout(r,ms));
+  for(let k=1;k<=5;k++){$("#br-n").textContent=`Ciclo ${k} de 5`;c.style.transition="transform 4s ease-in-out";c.textContent="Inspire";c.style.transform="scale(1)";await w(4000);c.textContent="Segure";await w(4000);c.style.transition="transform 6s ease-in-out";c.textContent="Solte";c.style.transform="scale(.55)";await w(6000)}
+  c.textContent="Pronto ✓";brRun=false;addXP(5,"Respiração 😮‍💨")};
+
+function tlNext(){$("#tl-text").textContent=DATA.tl[Math.floor(Math.random()*DATA.tl.length)]}
+$("#tl-next").onclick=tlNext;
+$("#tl-mic").onclick=()=>openLab("leitura",{t:"Leia em voz alta",p:$("#tl-text").textContent});
+
+let imSec=30,imT=30,imRun=null;
+function imSet(s){imSec=s;imT=s;$("#im-timer").textContent=fmt(s);$("#im-30").className="btn "+(s===30?"":"ghost");$("#im-60").className="btn "+(s===60?"":"ghost")}
+$("#im-30").onclick=()=>imSet(30);$("#im-60").onclick=()=>imSet(60);
+$("#im-draw").onclick=()=>{$("#im-text").textContent=DATA.temas[Math.floor(Math.random()*DATA.temas.length)];clearInterval(imRun);imRun=null;imT=imSec;$("#im-timer").textContent=fmt(imT);$("#im-play").textContent="Falar!"};
+$("#im-play").onclick=()=>{if(imRun){clearInterval(imRun);imRun=null;$("#im-play").textContent="Falar!";return}
+  if($("#im-text").textContent==="Toque em sortear")$("#im-draw").click();
+  let prep=5;$("#im-play").textContent="Parar";$("#im-timer").textContent="Prepara… "+prep;
+  imRun=setInterval(()=>{if(prep>0){prep--;$("#im-timer").textContent=prep?"Prepara… "+prep:"VAI!";if(!prep)beep();return}
+    imT--;$("#im-timer").textContent=fmt(imT);if(imT<=0){clearInterval(imRun);imRun=null;beep();$("#im-play").textContent="Falar!";imT=imSec;addXP(10,"Improviso 🎯")}},1000)};
+$("#im-lab").onclick=()=>{let t=$("#im-text").textContent;if(t==="Toque em sortear")t=DATA.temas[Math.floor(Math.random()*DATA.temas.length)];openLab("livre",{t:"Tema de improviso",p:t})};
+
+const VC=["né","tipo","ééé","tá","então","assim"];let vc={},vcT=120,vcRun=null;
+function vcRender(){$("#vc-c").innerHTML=VC.map(v=>`<button class="cnt" data-v="${v}"><b>${vc[v]||0}</b><span>${v}</span></button>`).join("");$("#vc-total").textContent="Total: "+VC.reduce((a,v)=>a+(vc[v]||0),0);$$("#vc-c .cnt").forEach(b=>b.onclick=()=>{vc[b.dataset.v]=(vc[b.dataset.v]||0)+1;vcRender()})}
+$("#vc-reset").onclick=()=>{vc={};clearInterval(vcRun);vcRun=null;vcT=120;$("#vc-timer").textContent="2:00";$("#vc-play").textContent="Iniciar 2 min";vcRender()};
+$("#vc-play").onclick=()=>{if(vcRun){clearInterval(vcRun);vcRun=null;$("#vc-play").textContent="Continuar";return}$("#vc-play").textContent="Pausar";vcRun=setInterval(()=>{vcT--;$("#vc-timer").textContent=fmt(vcT);if(vcT<=0){clearInterval(vcRun);vcRun=null;beep();$("#vc-play").textContent="Iniciar 2 min";vcT=120;addXP(10,"Caça-vícios")}},1000)};
+
+let actx=null;function beep(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=880;g.gain.value=.08;o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.18)}catch(e){}}
+
+// =====================================================================
+// ---------- MOTOR DE ESCUTA: microfone + reconhecimento de voz
+// =====================================================================
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+const HAS_MIC=!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia);
+function pitchOf(b,sr){const N=1024,minL=Math.floor(sr/400),maxL=Math.min(Math.floor(sr/70),b.length-N-1);let e0=0;for(let i=0;i<N;i++)e0+=b[i]*b[i];if(e0<1e-5)return 0;
+  const r=new Float32Array(maxL+2);let best=0;for(let l=minL;l<=maxL;l++){let c=0;for(let i=0;i<N;i++)c+=b[i]*b[i+l];r[l]=c/e0;if(r[l]>best)best=r[l]}
+  if(best<.5)return 0;for(let l=minL+1;l<maxL;l++){if(r[l]>=best*.88&&r[l]>=r[l-1]&&r[l]>=r[l+1])return sr/l}return 0}
+async function startCapture(st){
+  st.frames=[];st.final="";st.sess="";st.sessConf=[];st.conf=[];st.lastIm="";st.srErr=null;st.micErr=null;st.t0=performance.now();st.on=true;
+  const AC=window.AudioContext||window.webkitAudioContext;try{if(AC&&HAS_MIC){st.ac=new AC();if(st.ac.resume)st.ac.resume()}}catch(e){}
+  if(SR)startSR(st);
+  if(HAS_MIC){try{st.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})}catch(e){st.micErr=e&&e.name||"erro"}}else st.micErr="sem-suporte";
+  if(st.stream&&st.ac){try{if(st.ac.resume)await st.ac.resume();const src=st.ac.createMediaStreamSource(st.stream);st.an=st.ac.createAnalyser();st.an.fftSize=2048;src.connect(st.an);st.buf=new Float32Array(2048);st.rate=st.ac.sampleRate;
+      st.iv=setInterval(()=>{st.an.getFloatTimeDomainData(st.buf);let s=0,pk=0;for(let i=0;i<st.buf.length;i++){const x=st.buf[i];s+=x*x;const a=x<0?-x:x;if(a>pk)pk=a}const rms=Math.sqrt(s/st.buf.length);st.frames.push([rms,rms>.003?pitchOf(st.buf,st.rate):0,pk]);st.onLevel&&st.onLevel(rms)},50)}catch(e){}
+    try{if(window.MediaRecorder){const ty=["audio/webm;codecs=opus","audio/mp4","audio/webm","audio/ogg"].find(t=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t));st.mr=ty?new MediaRecorder(st.stream,{mimeType:ty}):new MediaRecorder(st.stream);st.chunks=[];st.mr.ondataavailable=e=>{if(e.data&&e.data.size)st.chunks.push(e.data)};st.mr.start(500)}}catch(e){st.mr=null}}
+}
+function startSR(st){try{const r=new SR();r.lang="pt-BR";r.continuous=true;r.interimResults=true;r.maxAlternatives=1;
+  r.onresult=e=>{let f="",im="",cf=[];for(let i=0;i<e.results.length;i++){const x=e.results[i];if(x.isFinal){f+=x[0].transcript+" ";if(x[0].confidence)cf.push(x[0].confidence)}else im+=x[0].transcript}st.sess=f;st.sessConf=cf;if(im)st.lastIm=im;st.onLive&&st.onLive(st.final+f+im)};
+  r.onerror=e=>{if(e.error!=="no-speech"&&e.error!=="aborted")st.srErr=e.error};
+  r.onend=()=>{st.final+=st.sess;st.conf.push(...st.sessConf);st.sess="";st.sessConf=[];if(st.on&&!st.srErr){setTimeout(()=>{if(st.on)startSR(st)},60)}else if(st.stopRes)st.stopRes()};
+  st.rec=r;r.start()}catch(e){st.srErr="start"}}
+function stopCapture(st){return new Promise(res=>{st.on=false;clearInterval(st.iv);st.dur=(performance.now()-st.t0)/1000;let fired=false;
+  const cleanup=()=>{try{st.stream&&st.stream.getTracks().forEach(t=>t.stop())}catch(e){}try{st.ac&&st.ac.close()}catch(e){}};
+  const fin=()=>{if(fired)return;fired=true;if(st.sess){st.final+=st.sess;st.sess=""}if(!st.final.trim()&&st.lastIm)st.final=st.lastIm;
+    const done=()=>{cleanup();st.blob=st.chunks&&st.chunks.length?new Blob(st.chunks,{type:st.chunks[0].type||"audio/webm"}):null;res(st)};
+    if(st.mr&&st.mr.state!=="inactive"){let ok=false;st.mr.onstop=()=>{if(!ok){ok=true;done()}};try{st.mr.stop()}catch(e){ok=true;done()}setTimeout(()=>{if(!ok){ok=true;done()}},1200)}else done()};
+  st.stopRes=fin;if(st.rec){try{st.rec.stop()}catch(e){fin()}}else fin();setTimeout(fin,2000)})}
+
+// ---------- análise
+const STRONG=new Set(["né","tipo","sabe","entendeu","entende","basicamente","literalmente","tipassim"]);
+const WEAK=new Set(["então","aí","assim","tá","enfim","ok"]);
+const isHes=t=>/^(é{2,}|e{2,}h*|eh+|ah+n*|ãh*|ã+|hu+m+|hm+|uh+|uhm+|ahm+)$/.test(t);
+const STOP=new Set("a o e é de da do das dos em no na nos nas um uma uns umas que para pra por com sem se eu você ele ela eles elas nós me te lhe meu minha seu sua isso isto aquilo esse essa este esta mas mais muito muita não sim já foi ser ter tem tinha era vai vou como quando onde porque porquê também ainda só bem aqui lá ou ao aos às pelo pela the".split(" "));
+const nrm=w=>w.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]/g,"");
+function audioStats(F){if(!F||F.length<20)return{valid:false};const r=F.map(f=>f[0]),srt=[...r].sort((a,b)=>a-b),pc=p=>srt[Math.floor(p*(srt.length-1))];
+  const noise=pc(.1),speech=pc(.9);if(speech<.0025||speech<noise*2.5)return{valid:false,quiet:speech<.0025};
+  const thr=noise+(speech-noise)*.2,v=r.map(x=>x>thr);let first=v.indexOf(true),last=v.lastIndexOf(true);if(first<0||last-first<20)return{valid:false};
+  const pauses=[];let run=0;for(let i=first;i<=last;i++){if(!v[i])run++;else{if(run)pauses.push(run*.05);run=0}}
+  const speakSec=(last-first+1)*.05,vr=[],f0=[];let clip=0;for(let i=first;i<=last;i++){if(v[i]){vr.push(r[i]);if(F[i][1])f0.push(F[i][1]);if(F[i][2]>.98)clip++}}
+  const db=20*Math.log10(avg(vr)||1e-6);let semi=null;if(f0.length>=20){const st=f0.map(f=>12*Math.log2(f/100)).sort((a,b)=>a-b),med=st[Math.floor(st.length/2)],k=st.filter(s=>Math.abs(s-med)<9),m=avg(k);semi=Math.sqrt(avg(k.map(s=>(s-m)*(s-m))))}
+  return{valid:true,speakSec,good:pauses.filter(p=>p>=.4&&p<=2.5).length,blanks:pauses.filter(p=>p>3).length,longest:pauses.length?Math.max(...pauses):0,db,clip:clip>6,semi}}
+function lcsAlign(a,b){const n=a.length,m=b.length,D=[];for(let i=0;i<=n;i++){D.push(new Array(m+1).fill(0))}for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)D[i][j]=a[i]===b[j]?D[i+1][j+1]+1:Math.max(D[i+1][j],D[i][j+1]);
+  const hit=new Array(n).fill(false);let i=0,j=0;while(i<n&&j<m){if(a[i]===b[j]){hit[i]=true;i++;j++}else if(D[i+1][j]>=D[i][j+1])i++;else j++}return hit}
+function analyze(st,mode,target){
+  const words=st.final.trim().split(/\s+/).filter(Boolean),toks=words.map(w=>w.toLowerCase().replace(/[^\p{L}\p{N}]/gu,""));
+  const A=audioStats(st.frames),dur=A.valid?Math.max(A.speakSec,3):Math.max(st.dur,3),mins=dur/60;
+  const fc={},mark=new Set(),wc={};toks.forEach((t,i)=>{if(WEAK.has(t))wc[t]=(wc[t]||0)+1});
+  toks.forEach((t,i)=>{let k=null;if(STRONG.has(t))k=t;else if(isHes(t))k="ééé";else if(WEAK.has(t)&&wc[t]>=3)k=t;else if(t==="é"&&toks[i+1]==="é"){k="é é"}if(k){fc[k]=(fc[k]||0)+1;mark.add(i)}});
+  const nF=Object.values(fc).reduce((a,b)=>a+b,0),wpm=words.length/mins,fpm=nF/mins;
+  const rep={},orig={};toks.forEach(t=>{const n=nrm(t);if(n.length>3&&!STOP.has(t)&&!STRONG.has(t)&&!WEAK.has(t)){rep[n]=(rep[n]||0)+1;orig[n]=orig[n]||t}});
+  const topRep=Object.entries(rep).filter(([w,c])=>c>=4&&c/words.length>.04).sort((a,b)=>b[1]-a[1]).slice(0,2);
+  const sc={};const enough=words.length>=8;
+  if(mode==="leitura"&&target){const tw=target.split(/\s+/).map(nrm).filter(Boolean),hw=words.map(nrm).filter(Boolean),hit=lcsAlign(tw,hw);sc.diccao=Math.round(hit.filter(Boolean).length/tw.length*100);st.read={words:target.split(/\s+/).filter(w=>nrm(w)),hit}}
+  else if(st.conf.length&&enough){sc.diccao=Math.round(clamp(40+(avg(st.conf)-.6)/.35*60,30,100))}
+  if(enough&&mode!=="leitura"){sc.ritmo=Math.round(clamp(wpm<120?100-(120-wpm)*1.8:wpm>165?100-(wpm-165)*2:100,15,100));sc.vicios=Math.round(clamp(100-fpm*14,0,100))}
+  if(A.valid){const ppm=A.good/(A.speakSec/60);if(mode!=="leitura")sc.pausas=Math.round(clamp(35+ppm*13,20,100));sc.fluencia=Math.round(clamp(100-30*A.blanks,10,100));sc.volume=Math.round(clamp(30+(A.db+44)/18*70,20,100));if(A.semi!=null)sc.entonacao=Math.round(clamp(30+(A.semi-1.2)/2.3*70,20,100))}
+  const W={ritmo:1,vicios:1.3,pausas:1,fluencia:1,volume:.8,entonacao:.8,diccao:mode==="leitura"?3:.5};const ks=Object.keys(sc);
+  const score=ks.length?Math.round(ks.reduce((a,k)=>a+sc[k]*W[k],0)/ks.reduce((a,k)=>a+W[k],0)):null;
+  // erros e acertos
+  const errs=[],goods=[];
+  if(mode==="leitura"&&st.read){const miss=st.read.words.filter((w,i)=>!st.read.hit[i]).map(w=>w.replace(/[^\p{L}\p{N}]/gu,""));if(miss.length)errs.push({e:"👅",t:`${miss.length} palavra${miss.length>1?"s":""} não ${miss.length>1?"saíram":"saiu"} clara${miss.length>1?"s":""}`,d:`Repita devagar, exagerando a boca: <b>${miss.slice(0,6).map(esc).join(", ")}</b>. Depois acelere sem perder nenhuma sílaba.`,refs:[REF.trava,REF.voz],tool:"trava"});else goods.push("Todas as palavras saíram claras. Dicção limpa! 👅")}
+  if(sc.vicios!=null){if(nF>=2&&fpm>1.5)errs.push({e:"🚫",t:`${nF} vício${nF>1?"s":""} de linguagem`,d:`${Object.entries(fc).map(([k,v])=>`“${k}” ${v}x`).join(" · ")}. Troque cada um por uma pausa curta: a pausa passa segurança, o vício passa nervosismo.`,refs:[REF.vicios,REF.silencio],tool:"vicios"});else goods.push(nF?"Quase nenhum vício de linguagem. Muito bom!":"Nenhum vício de linguagem detectado. 🚫")}
+  if(sc.ritmo!=null){if(wpm>170)errs.push({e:"⏩",t:`Ritmo acelerado: ${Math.round(wpm)} palavras por minuto`,d:"O ideal é entre 120 e 160. Quem corre parece nervoso e perde quem ouve. Respire nos pontos finais e faça pausas depois das ideias importantes.",refs:[REF.silencio,REF.tons],tool:"respirar"});
+    else if(wpm<105)errs.push({e:"🐢",t:`Ritmo lento: ${Math.round(wpm)} palavras por minuto`,d:"O ideal é entre 120 e 160. Fala muito lenta ou cheia de buracos cansa quem ouve. Prepare a estrutura antes (P.E.P.) para as ideias fluírem.",refs:[REF.estrut,REF.tons],tool:"improviso"});else goods.push(`Ritmo no ponto: ${Math.round(wpm)} palavras por minuto.`)}
+  if(A.valid){if(sc.pausas!=null&&sc.pausas<60)errs.push({e:"⏸️",t:"Quase sem pausas",d:"Você emendou as frases. Faça uma pausa de 1 segundo depois de cada ideia: é ali que quem ouve entende e sente a sua segurança.",refs:[REF.silencio],tool:"lab"});else if(sc.pausas!=null)goods.push("Usou bem as pausas. Quem pausa, manda na sala.");
+    if(A.blanks)errs.push({e:"🧊",t:`Travou ${A.blanks} vez${A.blanks>1?"es":""} (silêncio de mais de 3 segundos)`,d:"Deu branco? Normal. Use a estrutura P.E.P. (Ponto, Exemplo, Ponto) para nunca ficar sem saber o próximo passo, e a frase de resgate: “deixa eu retomar o ponto principal”.",refs:[REF.estrut,REF.nervo],tool:"improviso"});
+    if(A.clip)errs.push({e:"📢",t:"Som estourando",d:"Você está muito perto do microfone ou gritando. A força vem da barriga, não da garganta.",refs:[REF.voz],tool:"respirar"});
+    else if(sc.volume<55)errs.push({e:"🔈",t:"Volume baixo",d:"Sua voz está chegando fraca. Fale para a última pessoa da sala, com apoio da barriga (nível 4 de 5). Grave com o celular a uns 30 cm da boca.",refs:[REF.voz,REF.vozes],tool:"respirar"});else goods.push("Volume bom: sua voz chegou firme.");
+    if(sc.entonacao!=null){if(sc.entonacao<55)errs.push({e:"〰️",t:"Voz no mesmo tom (monótona)",d:"Sua melodia está reta, e isso faz quem ouve desligar. Suba o tom nas perguntas, desça nas certezas e dê ênfase na palavra mais importante de cada frase.",refs:[REF.tons,REF.vozes],tool:"lab"});else if(sc.entonacao>=75)goods.push("Entonação viva: sua voz tem melodia.")}}
+  if(topRep.length&&mode!=="leitura")errs.push({e:"🔁",t:`Palavra repetida: “${orig[topRep[0][0]]}” (${topRep[0][1]}x)`,d:"Repetir demais a mesma palavra deixa a fala pobre. Troque por sinônimos ou por uma analogia.",refs:[REF.analog],tool:"improviso"});
+  if(mode!=="leitura"&&words.length<25&&st.dur>25)errs.push({e:"🤐",t:"Você falou pouco",d:`Foram só ${words.length} palavras. Use o P.E.P.: dê sua opinião, um exemplo da sua vida e feche repetindo a opinião.`,refs:[REF.estrut,REF.improv],tool:"improviso"});
+  return{mode,score,sc,wpm:Math.round(wpm),nF,fc,mark:[...mark],words,errs,goods,A,srOk:!!st.final.trim(),srErr:st.srErr,micErr:st.micErr,dur:Math.round(st.dur),blob:st.blob,read:st.read};
+}
+const TILES=[["ritmo","Ritmo",an=>an.wpm+"",""+"ppm · ideal 120–160"],["vicios","Vícios",an=>an.nF+"","no total"],["pausas","Pausas",an=>an.A.good+"","pausas boas"],["fluencia","Travadas",an=>an.A.blanks+"","silêncios > 3 s"],["volume","Volume",an=>an.sc.volume>=75?"Bom":an.sc.volume>=55?"Ok":"Baixo","força da voz"],["entonacao","Entonação",an=>an.sc.entonacao>=75?"Viva":an.sc.entonacao>=55?"Média":"Reta","melodia"],["diccao","Dicção",an=>an.sc.diccao+"%",""]];
+function renderAnalysis(an,box,opts){opts=opts||{};
+  if(an.score==null){box.innerHTML=`<div class="card" style="margin-top:12px;background:#FFF0EC;border-color:#FFC9BC"><h3>Não consegui te ouvir 😕</h3><p class="muted" style="margin-top:4px">${an.micErr==="NotAllowedError"||an.srErr==="not-allowed"?"O microfone foi bloqueado. Toque no cadeado ao lado do endereço do site e libere o microfone.":an.micErr==="sem-suporte"&&!SR?"Este navegador não permite usar o microfone. Abra o app no Chrome (Android) ou no Safari (iPhone).":"Fale mais perto do celular, em um lugar silencioso, por pelo menos 15 segundos."}</p></div>`;return}
+  const tiles=TILES.filter(t=>an.sc[t[0]]!=null).map(t=>{const v=an.sc[t[0]];return`<div class="mt ${v>=75?"g":v>=55?"m":"b"}"><b>${t[2](an)}</b><span>${t[1]}</span><small>${t[0]==="diccao"?(an.mode==="leitura"?"palavras claras":"clareza estimada"):t[3]}</small></div>`}).join("");
+  let tx="";if(an.mode==="leitura"&&an.read)tx=an.read.words.map((w,i)=>an.read.hit[i]?`<mark class="ok">${esc(w)}</mark>`:`<mark class="miss">${esc(w)}</mark>`).join(" ");
+  else if(an.words.length){const ms=new Set(an.mark);tx=an.words.map((w,i)=>ms.has(i)?`<mark class="f">${esc(w)}</mark>`:esc(w)).join(" ")}
+  const notes=[];if(!an.srOk)notes.push(SR?"Não consegui transcrever sua fala desta vez, então analisei só pela sua voz (volume, pausas e entonação).":"Este navegador não transcreve fala, então analisei só pela sua voz. Para contar vícios e ritmo, use o Chrome (Android) ou o Safari (iPhone).");
+  if(!an.A.valid)notes.push("O áudio veio muito baixo para medir volume, pausas e entonação. Fale mais perto do celular.");
+  notes.push("Hesitações como “ééé” e “hum” às vezes não aparecem na transcrição. Escute a sua gravação para conferir.");
+  const [lv]=an.score>=85?["Fala de palco"]:an.score>=70?["Muito bom"]:an.score>=50?["No caminho"]:["Bora treinar"];
+  box.innerHTML=`<div class="card dark" style="margin-top:12px"><div class="res-top">${ring(an.score)}<div><span class="level">${lv.toUpperCase()}</span><p style="margin-top:8px;font-size:14px">${an.errs.length?`Encontrei <b style="color:#fff">${an.errs.length} ponto${an.errs.length>1?"s":""}</b> para melhorar. Cada um mostra a página do e-book que resolve.`:"Não encontrei nenhum erro importante. Fala muito bem!"}</p>${opts.xp?`<p style="margin-top:6px"><span class="xp">+${opts.xp} XP</span></p>`:""}</div></div></div>
+  <div class="mgrid">${tiles}</div>
+  ${an.errs.length?`<div class="card"><h3 style="margin-bottom:2px">O que melhorar</h3>${an.errs.map(e=>`<div class="fx"><div class="e">${e.e}</div><div><b>${e.t}</b><p>${e.d}</p>${e.refs.map(refHTML).join("")}<div><button class="mini" onclick="openTool('${e.tool}')">🎯 Treinar isso →</button></div></div></div>`).join("")}</div>`:""}
+  ${an.goods.length?`<div class="card"><h3 style="margin-bottom:6px">Mandou bem</h3>${an.goods.map(g=>`<p style="font-size:14px;margin:4px 0">✅ ${g}</p>`).join("")}</div>`:""}
+  ${tx?`<div class="card"><h3 style="margin-bottom:6px">${an.mode==="leitura"?"O que eu ouvi do texto":"O que eu ouvi"}</h3><div class="tx">${tx}</div>${an.mode!=="leitura"&&an.nF?'<p class="note"><mark class="f">marcado</mark> = possível vício de linguagem</p>':""}</div>`:""}
+  ${an.blob?`<div class="card"><h3>Escute você mesmo</h3><audio controls src="${URL.createObjectURL(an.blob)}"></audio></div>`:""}
+  <p class="note">${notes.join(" ")}</p>`}
+
+function mountRecorder(root,cfg){
+  root.innerHTML=`<div class="micwrap"><button class="mic" aria-label="Gravar">🎙️</button><div class="lvl"><i></i></div><div class="rtime">${fmt(cfg.seconds())}</div><p class="muted center rhint">Toque no microfone e comece a falar</p></div><div class="live"></div>`;
+  const mic=root.querySelector(".mic"),lv=root.querySelector(".lvl i"),tm=root.querySelector(".rtime"),hint=root.querySelector(".rhint"),live=root.querySelector(".live");
+  let st=null,tick=null;const api={};
+  async function finish(){if(!st||!st.on)return;clearInterval(tick);mic.classList.remove("on");mic.disabled=true;hint.textContent="Analisando sua fala…";const r=await stopCapture(st);mic.disabled=false;mic.textContent="🎙️";hint.textContent="Toque para gravar de novo";tm.textContent=fmt(cfg.seconds());lv.style.width="0";cfg.onDone(analyze(r,cfg.mode(),cfg.target()))}
+  mic.onclick=async()=>{if(st&&st.on){finish();return}
+    if(!HAS_MIC&&!SR){toast("Este navegador não permite gravar. Use o Chrome ou o Safari.");return}
+    cfg.onStart&&cfg.onStart();st={onLevel:r=>{lv.style.width=Math.min(100,Math.sqrt(r)*450)+"%"},onLive:t=>{live.textContent=t}};live.textContent="";
+    mic.classList.add("on");mic.textContent="⏹";hint.textContent="Ouvindo… toque para parar";
+    await startCapture(st);
+    if(st.micErr==="NotAllowedError"&&!SR){st.on=false;clearInterval(st.iv);mic.classList.remove("on");mic.textContent="🎙️";hint.textContent="Microfone bloqueado";toast("Libere o microfone para este site nas configurações do navegador");return}
+    let left=cfg.seconds();tm.textContent=fmt(left);tick=setInterval(()=>{left--;tm.textContent=fmt(left);if(left<=0)finish()},1000)};
+  api.reset=()=>{tm.textContent=fmt(cfg.seconds());live.textContent=""};return api}
+
+// ---------- laboratório
+let labMode="livre",labSec=60,labPrompt=null;
+const LEIT=["Bom dia a todos. Hoje eu quero falar sobre algo que muda a vida de qualquer pessoa: a coragem de se comunicar.","Quem não fala, perde. Perde a venda, a nota, a amizade e a oportunidade que não volta mais.","A pausa não é um erro. A pausa é o momento em que quem ouve entende e sente a sua segurança."];
+function labNewPrompt(){labPrompt=labMode==="livre"?{t:"Fale sobre",p:DATA.temas[Math.floor(Math.random()*DATA.temas.length)]}:(Math.random()<.5?{t:"Leia em voz alta",p:DATA.tl[Math.floor(Math.random()*DATA.tl.length)]}:{t:"Leia em voz alta",p:LEIT[Math.floor(Math.random()*LEIT.length)]})}
+function labRender(){$$("[data-lm]").forEach(b=>b.classList.toggle("on",b.dataset.lm===labMode));
+  $("#lab-prompt").innerHTML=`<small>${esc(labPrompt.t.toUpperCase())}</small>${esc(labPrompt.p)}`;
+  $("#lab-chips").innerHTML=(labMode==="livre"?[30,60,90].map(s=>`<button class="chip ${s===labSec?"on":""}" data-ls="${s}">${s} s</button>`).join(""):"")+`<button class="chip" id="lab-new">🎲 ${labMode==="livre"?"Outro tema":"Outro texto"}</button>`;
+  $$("[data-ls]").forEach(b=>b.onclick=()=>{labSec=+b.dataset.ls;labRender();labRec.reset()});$("#lab-new").onclick=()=>{labNewPrompt();labRender()}}
+const labRec=mountRecorder($("#lab-rec"),{seconds:()=>labMode==="livre"?labSec:30,mode:()=>labMode,target:()=>labMode==="leitura"?labPrompt.p:"",onStart:()=>{$("#lab-res").innerHTML=""},
+  onDone:an=>{let xp=0;if(an.score!=null){xp=labMode==="leitura"?10:15;if(an.score>=80)xp+=5;S.labs.push({d:today(),m:labMode,s:an.score,w:an.wpm,f:an.nF});if(S.labs.length>60)S.labs=S.labs.slice(-60);save();award("primeira");if(an.score>=80&&labMode==="livre")award("nota80");if(labMode==="livre"&&an.nF===0&&an.words.length>=40)award("zero");if(labMode==="leitura"&&an.sc.diccao>=95)award("diccao")}
+    renderAnalysis(an,$("#lab-res"),{xp});if(xp)addXP(xp,labMode==="leitura"?"Dicção":"Laboratório de voz");setTimeout(()=>$("#lab-res").scrollIntoView({behavior:"smooth",block:"start"}),80)}});
+$$("[data-lm]").forEach(b=>b.onclick=()=>{labMode=b.dataset.lm;labNewPrompt();labRender();labRec.reset();$("#lab-res").innerHTML=""});
+function openLab(mode,prompt){labMode=mode;if(prompt)labPrompt=prompt;else labNewPrompt();if(mode==="livre"&&prompt&&prompt.t.startsWith("Desafio"))labSec=60;labRender();labRec.reset();$("#lab-res").innerHTML="";openTool("lab")}
+$("#home-lab").onclick=()=>openLab("livre");
+labNewPrompt();
+
+// ---------- diagnóstico completo
+let dStep=null,dAns=new Array(QN).fill(0),dRec=null;
+function ring(p){const r=46,c=2*Math.PI*r;return `<div class="ring"><svg width="110" height="110"><circle cx="55" cy="55" r="${r}" stroke="rgba(255,255,255,.15)" stroke-width="10" fill="none"/><circle cx="55" cy="55" r="${r}" stroke="#FFB400" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p/100)}"/></svg><b>${p}</b></div>`}
+function stepsBar(n){return `<div class="steps2">${["1 · Perguntas","2 · Teste de voz","3 · Resultado"].map((t,i)=>`<div class="${i<n?"ok":i===n?"on":""}">${t}</div>`).join("")}</div>`}
+function renderQ(){const f=$("#av-flow");let h=stepsBar(0)+`<div class="card"><div class="qprog"><p id="qp-t"></p><div class="tr"><i id="qp-b"></i></div></div><p class="muted" style="margin:6px 0 4px">De 1 a 5: o quanto cada frase descreve você <b>hoje</b>? (1 = nada a ver, 5 = sou eu)</p>`;
+  AREAS.forEach((a,ai)=>{h+=`<div class="ah" style="--k:${a.c}"><i></i>${a.n}</div>`;a.q.forEach((q,qi)=>{const i=ai*2+qi;h+=`<div class="q"><p>${q}</p><div class="seg">${[1,2,3,4,5].map(v=>`<button data-q="${i}" data-v="${v}" class="${dAns[i]===v?"sel":""}">${v}</button>`).join("")}</div></div>`})});
+  h+=`<button class="btn full" style="margin-top:14px" id="dq-next">Continuar para o teste de voz →</button></div>`;f.innerHTML=h;
+  const prog=()=>{const n=dAns.filter(Boolean).length;$("#qp-t").textContent=`Respondidas ${n} de ${QN}`;$("#qp-b").style.width=n/QN*100+"%"};prog();
+  $$("#av-flow .seg button").forEach(b=>b.onclick=()=>{dAns[+b.dataset.q]=+b.dataset.v;b.parentNode.querySelectorAll("button").forEach(x=>x.classList.toggle("sel",x===b));prog()});
+  $("#dq-next").onclick=()=>{const miss=dAns.findIndex(a=>!a);if(miss>=0){toast(`Falta responder a pergunta ${miss+1}`);$$("#av-flow .q")[miss].scrollIntoView({behavior:"smooth",block:"center"});return}dStep="voz";renderFlow();window.scrollTo({top:0,behavior:"smooth"})}}
+function renderVoice(){const f=$("#av-flow");f.innerHTML=stepsBar(1)+`<div class="card"><h3>Teste de voz · 45 segundos</h3><p class="muted" style="margin-top:4px">Agora o app vai te ouvir. Fale naturalmente, como se estivesse se apresentando para alguém novo. Ele mede ritmo, vícios, pausas, travadas, volume e entonação.</p><div class="prompt"><small>FALE SOBRE</small>Quem é você, o que você faz e um sonho que você tem.</div><div id="dv-rec"></div><div id="dv-res"></div><p class="center" style="margin-top:6px"><button class="mini" id="dv-skip" style="color:var(--muted)">Pular o teste de voz (resultado menos preciso)</button></p></div>`;
+  dRec=mountRecorder($("#dv-rec"),{seconds:()=>45,mode:()=>"livre",target:()=>"",onStart:()=>{$("#dv-res").innerHTML=""},onDone:an=>{if(an.score==null){renderAnalysis(an,$("#dv-res"));return}finishDiag(an)}});
+  $("#dv-skip").onclick=()=>finishDiag(null)}
+function finishDiag(an){const areas={};AREAS.forEach((a,ai)=>{areas[a.k]=Math.round((dAns[ai*2]+dAns[ai*2+1]-2)/8*100)});
+  const v={};if(an){const s=an.sc;const mix=(k,vals)=>{const x=vals.filter(z=>z!=null);if(x.length)v[k]=Math.round(avg(x))};mix("voz",[s.volume,s.entonacao]);mix("diccao",[s.diccao]);mix("ritmo",[s.ritmo,s.pausas]);mix("vicios",[s.vicios]);mix("estrutura",[s.fluencia]);
+    Object.keys(v).forEach(k=>areas[k]=Math.round(areas[k]*.5+v[k]*.5))}
+  const tot=Math.round(avg(Object.values(areas)));
+  const vs=an?{s:an.score,w:an.wpm,f:an.nF,fc:an.fc,b:an.A.valid?an.A.blanks:null,p:an.A.valid?an.A.good:null,vol:an.sc.volume,ent:an.sc.entonacao,errs:an.errs.map(e=>e.t)}:null;
+  S.diags.push({d:today(),ans:dAns.slice(),areas,tot,voice:vs,vk:Object.keys(v)});save();dAns=new Array(QN).fill(0);dStep=null;
+  award("diag");addXP(30,"Raio-X completo 🩺");renderAll();window.scrollTo({top:0,behavior:"smooth"})}
+function evidence(a,d){const v=d.voice;if(!v||!(d.vk||[]).includes(a.k))return"";
+  if(a.k==="vicios")return v.f?`No teste de voz: ${Object.entries(v.fc||{}).map(([k,n])=>`“${k}” ${n}x`).join(", ")}.`:"No teste de voz: nenhum vício detectado.";
+  if(a.k==="ritmo")return`No teste de voz: ${v.w} palavras por minuto${v.p!=null?` e ${v.p} pausas boas`:""}.`;
+  if(a.k==="voz")return v.vol!=null?`No teste de voz: volume ${v.vol>=75?"bom":v.vol>=55?"ok":"baixo"}${v.ent!=null?`, entonação ${v.ent>=75?"viva":v.ent>=55?"média":"reta"}`:""}.`:"";
+  if(a.k==="estrutura")return v.b!=null?(v.b?`No teste de voz: você travou ${v.b} vez${v.b>1?"es":""}.`:"No teste de voz: nenhuma travada."):"";return""}
+function renderResult(){const d=lastDiag(),box=$("#av-result");const first=S.diags[0];const base=S.diags.length>1?first.tot:(S.evals.length?oldScore(S.evals[0].a):null);const[lv,txt]=level(d.tot);
+  const prev=S.diags.length>1?first:null;
+  box.innerHTML=`<div class="card dark"><div class="score">${ring(d.tot)}<div><span class="level">${lv}</span><p style="margin-top:8px;font-size:14px">${txt}</p></div></div>
+   ${base!=null?`<p style="margin-top:12px;font-size:14px">Primeiro diagnóstico: <b style="color:#fff">${base}</b> → hoje: <b style="color:var(--amber)">${d.tot}</b> (${d.tot-base>=0?"+":""}${d.tot-base} pontos)</p>`:""}
+   ${d.voice?`<p style="margin-top:8px;font-size:13px">🎙️ Inclui seu teste de voz (nota da fala: ${d.voice.s}).</p>`:`<p style="margin-top:8px;font-size:13px">Sem teste de voz. Refaça com o microfone para um resultado mais preciso.</p>`}</div>
+   <div class="card"><h3 style="margin-bottom:4px">Suas 9 áreas</h3>${prev?'<p class="muted">Cinza = primeiro diagnóstico · Cor = hoje</p>':""}
+   ${AREAS.map(a=>`<div class="pbar" style="--k:${a.c}"><div class="t"><span>${a.n}</span><span>${d.areas[a.k]}%</span></div><div class="tr">${prev?`<i class="old" style="width:${prev.areas[a.k]}%"></i>`:""}<i style="width:${d.areas[a.k]}%;${prev?"height:5px;top:auto;":""}"></i></div></div>`).join("")}</div>
+   <div class="eyebrow" style="margin-top:6px">Seu mapa no e-book</div><h2 style="font-size:19px">Comece por estes 3 pontos</h2>
+   ${weakest(d,3).map((w,i)=>{const a=w.a,ev=evidence(a,d);return`<div class="card amap" style="--k:${a.c}"><h3>${i+1}. ${a.n} <span>${w.v}%</span></h3>${ev?`<p class="muted" style="margin-top:4px">${ev}</p>`:""}<p style="font-size:13px;font-weight:600;margin-top:8px">Leia no e-book:</p>${a.refs.map(refHTML).join("")}<p style="font-size:13px;font-weight:600;margin-top:10px">Pratique:</p><div><button class="mini" onclick="openTool('${a.tool}')">🎯 ${a.tn} →</button>${a.days.map(n=>`<button class="mini" onclick="openDay(${n})">🗓️ Lição do Dia ${n} →</button>`).join("")}</div></div>`}).join("")}
+   <div class="card"><h3>Seus pontos fortes 💪</h3><p class="muted" style="margin-top:4px">${AREAS.map(a=>({a,v:d.areas[a.k]})).sort((x,y)=>y.v-x.v).slice(0,2).map(x=>`<b style="color:var(--ink)">${x.a.n}</b> (${x.v}%)`).join(" e ")}. Use isso a seu favor enquanto treina o resto.</p></div>
+   <div class="row" style="margin-bottom:14px"><button class="btn" style="flex:1" id="av-copy">Copiar para a comunidade</button><button class="btn ghost" style="flex:1" id="av-redo">Refazer raio-X</button></div>`;
+  $("#av-copy").onclick=async()=>{const w=weakest(d,1)[0];const t=`📊 MEU RAIO-X DESTRAVA${S.name?" · "+S.name:""}\n${base!=null?`Antes: ${base} → Hoje: ${d.tot} (${d.tot-base>=0?"+":""}${d.tot-base})`:`Nota: ${d.tot}/100 · ${lv}`}\n🎯 Foco: ${w.a.n} (${w.v}%)\n⚡ ${S.xp} XP · 🔥 ${calStreak()} dias seguidos · ${Object.keys(S.done).length}/30 lições`;
+    try{await navigator.clipboard.writeText(t);toast("Copiado! Cola no grupo Antes × Depois 📈")}catch(e){toast("Não deu para copiar. Tire um print desta tela!")}};
+  $("#av-redo").onclick=()=>{dStep="q";renderFlow();$("#av-flow").scrollIntoView({behavior:"smooth"})}}
+function renderFlow(){const f=$("#av-flow");if(dStep==="q")renderQ();else if(dStep==="voz")renderVoice();else f.innerHTML=""}
+function renderEval(){const box=$("#av-result");
+  if(S.diags.length&&!dStep){$("#av-title").textContent=S.diags.length>1?"Sua evolução":"Seu raio-X de comunicação";renderResult();renderFlow();return}
+  box.innerHTML=S.evals.length&&!S.diags.length?`<div class="card" style="background:var(--tint);border-color:#F4DFA3"><h3>Novo diagnóstico completo 🩺</h3><p class="muted" style="margin-top:4px">Seu diagnóstico antigo deu nota <b>${oldScore(S.evals[S.evals.length-1].a)}</b>. O novo é mais completo: 9 áreas, teste de voz e o mapa das páginas do e-book. Sua nota antiga fica guardada para comparar.</p></div>`:(!S.diags.length?`<p class="muted" style="margin-bottom:12px">Dois passos: 18 perguntas rápidas e um teste de voz de 45 segundos. No fim, você recebe a sua nota em 9 áreas e as páginas do e-book que resolvem seus pontos fracos.</p>`:"");
+  if(!dStep)dStep="q";$("#av-title").textContent="Seu raio-X de comunicação";renderFlow()}
+
+// ---------- nav
+const VIEWS=["inicio","jornada","treinar","avaliacao","comunidade","duvidas"];
+function go(v){if(location.hash!=="#"+v)location.hash=v;else show(v)}
+function show(v){if(!VIEWS.includes(v))v="inicio";$$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));$$("nav a").forEach(a=>a.classList.toggle("on",a.dataset.nav===v));window.scrollTo(0,0)}
+window.addEventListener("hashchange",()=>show(location.hash.slice(1)));
+$$("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+$("#name-ok").onclick=()=>{const v=$("#name-in").value.trim();if(!v)return;S.name=v;save();renderAll()};
+const wa=$("#wa-link");if(wa){if(COMMUNITY_URL){wa.href=COMMUNITY_URL}else{wa.onclick=e=>{e.preventDefault();toast("O link da comunidade chega no seu e-mail de compra 💌")}}}
+document.addEventListener('click',async e=>{if(e.target&&e.target.id==='cp-copy'){try{await navigator.clipboard.writeText('VINIFALA2027');toast('Cupom copiado! 🎟️')}catch(_){toast('Anote o cupom: VINIFALA2027')}}});
+
+// ---------- dúvidas
+$("#dq-send").onclick=()=>{const n=$("#dq-nome").value.trim(),m=$("#dq-msg").value.trim();if(!m){toast("Escreva sua dúvida primeiro 😉");$("#dq-msg").focus();return}
+  const s="Dúvida DESTRAVA"+(n?" - "+n:"");const b=(n?"Oi Vini, aqui é "+n+".\n\n":"Oi Vini!\n\n")+m+"\n\n(enviado pelo App DESTRAVA)";
+  location.href="mailto:"+SUPPORT_EMAIL+"?subject="+encodeURIComponent(s)+"&body="+encodeURIComponent(b)};
+$("#dq-copy").onclick=e=>{e.preventDefault();(navigator.clipboard?navigator.clipboard.writeText(SUPPORT_EMAIL):Promise.reject()).then(()=>toast("E-mail copiado ✓")).catch(()=>toast(SUPPORT_EMAIL))};
+
+function renderAll(){renderHeader();renderHome();renderBadges();renderPath();renderEval()}
+checkBadges();bq=[];
+pI=((nextDay()||1)-1)%7;renderPrinc();labRender();renderAll();aqRender();tlNext();vcRender();imSet(30);show(location.hash.slice(1));
+
+</script>
+</body>
+</html>

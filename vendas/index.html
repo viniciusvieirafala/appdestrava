@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DESTRAVA · Perca a vergonha de falar em público em 30 dias | Vinícius Vieira Fala</title>
+<meta name="description" content="O treino de 15 minutos por dia, por 30 dias, para perder a vergonha de falar em público — mesmo sendo jovem. Por Vinícius Vieira (@viniciusvieirafala).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital@0;1&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1020;--navy2:#141B36;--amber:#FFB400;--coral:#FF5A36;--cream:#FBF7F0;--ink:#141A2E;--muted:#5E6577;--line:#E6DFD2;--tint:#FFF3D1;--green:#18C29C;--violet:#7C5CFF}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--cream);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.pop{font-family:Poppins,system-ui,sans-serif;line-height:1.12;letter-spacing:-.02em}
+em{font-style:normal;color:var(--coral)}
+.dark em{color:var(--amber)}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.narrow{max-width:760px;margin:0 auto;padding:0 22px}
+section{padding:84px 0}
+.dark{background:var(--navy);color:#fff}
+.dark p{color:#D7DAE5}
+.eyebrow{font-family:Poppins;font-weight:700;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--coral);margin-bottom:12px}
+.dark .eyebrow{color:var(--amber)}
+h2{font-size:clamp(28px,4.6vw,44px);margin-bottom:18px}
+.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted)}
+.dark .lead{color:#C9CDDA}
+.center{text-align:center}
+.btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.2;background:linear-gradient(135deg,var(--amber),#FF8A1F);color:var(--navy);font-family:Poppins;font-weight:800;font-size:18px;padding:18px 34px;border-radius:14px;text-decoration:none;box-shadow:0 10px 30px rgba(255,150,0,.35);transition:transform .15s,box-shadow .15s;border:none;cursor:pointer;text-align:center}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(255,150,0,.45)}
+.btn small{display:block;font-weight:600;font-size:12px;opacity:.75}
+.cta-note{font-size:13px;color:var(--muted);margin-top:12px}
+.dark .cta-note{color:#9EA4B8}
+/* topbar */
+.topbar{background:var(--coral);color:#fff;text-align:center;font-weight:600;font-size:14px;padding:9px 12px}
+/* hero */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;padding:56px 0 80px}
+.hero:before{content:"";position:absolute;top:-260px;left:50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.28),rgba(255,90,54,.10) 38%,transparent 66%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.brand{position:relative;display:flex;justify-content:space-between;align-items:center;margin-bottom:38px;font-size:14px;color:#C9CDDA}
+.brand b{font-family:Poppins;font-size:22px;color:#fff;letter-spacing:-.5px}
+.hero h1{font-size:clamp(36px,6vw,62px);margin-bottom:20px}
+.hero h1 em{color:var(--amber)}
+.hero p.sub{font-size:clamp(18px,2.3vw,21px);color:#D7DAE5;margin-bottom:28px;max-width:560px}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.pill{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:30px;padding:7px 14px;font-size:14px;font-weight:600}
+.pill b{color:var(--amber)}
+/* book mockup */
+.mock{position:relative;height:440px}
+.book{position:absolute;left:4%;top:10px;width:270px;height:390px;border-radius:6px 14px 14px 6px;background:radial-gradient(circle at 50% 0%,rgba(255,180,0,.38),transparent 60%),var(--navy2);box-shadow:-10px 0 0 #070b17 inset, 0 30px 60px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08);transform:rotate(-6deg);padding:26px 22px;display:flex;flex-direction:column}
+.book .k{display:inline-block;align-self:flex-start;background:var(--amber);color:var(--navy);font-family:Poppins;font-weight:700;font-size:10px;letter-spacing:1.5px;padding:3px 8px;border-radius:3px;margin-bottom:14px}
+.book .t{font-family:Poppins;font-weight:800;font-size:64px;line-height:.86;letter-spacing:-3px}
+.book .t span{color:var(--amber)}
+.book .s{font-size:12px;color:#C9CDDA;margin-top:14px;line-height:1.4}
+.book .a{margin-top:auto;font-size:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
+.book .a b{color:var(--amber)}
+.phone{position:absolute;right:2%;top:70px;width:180px;height:360px;border-radius:30px;background:#05070f;padding:9px;box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.12);transform:rotate(5deg)}
+.screen{width:100%;height:100%;border-radius:22px;background:var(--cream);overflow:hidden;color:var(--ink);font-size:9px}
+.screen .h{background:var(--navy);color:#fff;padding:14px 10px 12px}
+.screen .h b{font-family:Poppins;font-size:12px}
+.screen .ring{width:74px;height:74px;margin:12px auto 6px;border-radius:50%;background:conic-gradient(var(--amber) 0 68%,#E6DFD2 68% 100%);display:flex;align-items:center;justify-content:center}
+.screen .ring i{width:58px;height:58px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-style:normal;font-family:Poppins;font-weight:800;font-size:20px}
+.screen .bar{margin:6px 12px;height:6px;border-radius:6px;background:#E6DFD2;position:relative}
+.screen .bar s{position:absolute;inset:0 auto 0 0;border-radius:6px;text-decoration:none}
+.screen .lbl{margin:8px 12px 0;font-weight:700;font-size:8.5px}
+.badge-app{position:absolute;right:0;top:20px;background:var(--coral);color:#fff;font-family:Poppins;font-weight:700;font-size:12px;padding:6px 10px;border-radius:8px;transform:rotate(5deg);z-index:2}
+/* identify */
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px}
+.check{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 18px 18px 54px;position:relative;font-size:16px}
+.check:before{content:"✕";position:absolute;left:16px;top:16px;width:26px;height:26px;border-radius:50%;background:#FFE3DB;color:var(--coral);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.callout{margin-top:34px;background:var(--navy);color:#fff;border-radius:20px;padding:28px;font-family:Poppins;font-weight:700;font-size:clamp(20px,2.8vw,26px);line-height:1.3}
+.callout em{color:var(--amber)}
+/* cost */
+.cost{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:30px 0}
+.cost div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 10px;text-align:center;font-weight:600;font-size:15px}
+.cost div span{display:block;font-size:26px;margin-bottom:6px}
+/* story */
+.story{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:start}
+.avatar{aspect-ratio:1/1;border-radius:24px;background:radial-gradient(circle at 50% 30%,rgba(255,180,0,.45),transparent 60%),var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:24px}
+.avatar .mic{width:84px;height:84px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.avatar .mic svg{width:44px;height:44px;color:var(--navy)}
+.avatar b{font-family:Poppins;font-size:22px}
+.avatar span{color:var(--amber);font-size:14px;font-weight:600}
+.story p{margin-bottom:16px}
+.quote{font-family:Lora;font-style:italic;font-size:22px;line-height:1.4;border-left:5px solid var(--amber);padding-left:18px;margin:24px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:36px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 14px;text-align:center}
+.stat b{display:block;font-family:Poppins;font-weight:800;font-size:clamp(24px,3.4vw,32px);color:var(--coral);line-height:1.1}
+.stat span{font-size:13px;color:var(--muted);font-weight:600}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.cred{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;font-size:15px;line-height:1.45}
+.cred i{font-style:normal;font-size:22px}
+/* science */
+.sci{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.sci div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:22px}
+.sci .n{font-family:Poppins;font-weight:800;font-size:40px;color:var(--amber);line-height:1}
+.sci h3{font-size:19px;margin:10px 0 8px;color:#fff}
+.sci p{font-size:15px}
+.sci small{display:block;margin-top:10px;color:#8E94A8;font-size:12px}
+/* method */
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+.wk{background:#fff;border:1px solid var(--line);border-top:6px solid var(--k);border-radius:16px;padding:20px}
+.wk .d{font-family:Poppins;font-weight:700;font-size:12px;letter-spacing:1.5px;color:var(--k)}
+.wk h3{font-size:24px;margin:4px 0 8px}
+.wk p{font-size:15px;color:var(--muted)}
+.anchors{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.anc{background:var(--tint);border-radius:16px;padding:18px;font-size:15px}
+.anc b{display:block;font-family:Poppins;font-size:17px;margin:4px 0}
+.anc span{font-size:26px}
+.principles{counter-reset:p;display:grid;gap:10px;margin-top:26px}
+.pr{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 70px;position:relative}
+.pr:before{counter-increment:p;content:"0" counter(p);position:absolute;left:18px;top:12px;font-family:Poppins;font-weight:800;font-size:28px;color:transparent;-webkit-text-stroke:1.5px var(--coral)}
+.pr b{font-family:Poppins;font-size:17px}
+.pr p{font-size:15px;color:var(--muted)}
+/* offer */
+.offer{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:start;margin-top:36px}
+.items{display:grid;gap:12px}
+.item{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.item .ic{flex:none;width:52px;height:52px;border-radius:14px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:24px}
+.item h3{font-size:18px;margin-bottom:4px}
+.item p{font-size:15px;color:var(--muted)}
+.item .tag{display:inline-block;font-family:Poppins;font-weight:700;font-size:11px;letter-spacing:1px;padding:3px 8px;border-radius:6px;background:var(--tint);color:#B07800;margin-left:6px;vertical-align:2px}
+.item.bump{border:2px dashed var(--coral);background:#FFF6F3}
+.item.bump .ic{background:var(--coral)}
+.pricebox{position:sticky;top:20px;background:var(--navy);color:#fff;border-radius:22px;padding:30px;text-align:center;overflow:hidden}
+.pricebox:before{content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.3),transparent 65%)}
+.pricebox>*{position:relative}
+.pricebox .lot{display:inline-block;background:var(--coral);font-family:Poppins;font-weight:700;font-size:12px;letter-spacing:1.5px;padding:5px 12px;border-radius:8px;margin-bottom:14px}
+.pricebox .p{font-family:Poppins;font-weight:800;font-size:68px;line-height:1;color:var(--amber)}
+.pricebox .p sup{font-size:26px;vertical-align:28px;margin-right:4px}
+.pricebox .per{color:#C9CDDA;font-size:15px;margin:6px 0 20px}
+.pricebox ul{list-style:none;text-align:left;margin:0 0 22px;font-size:15px}
+.pricebox li{padding:8px 0 8px 28px;border-bottom:1px solid rgba(255,255,255,.1);position:relative;color:#D7DAE5}
+.pricebox li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+.pricebox li.opt:before{content:"+";color:var(--amber)}
+.pricebox .btn{width:100%}
+.secure{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:#9EA4B8}
+/* app showcase */
+.appgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+.af{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:18px}
+.af span{font-size:26px}
+.af b{display:block;font-family:Poppins;font-size:17px;margin:6px 0 4px;color:#fff}
+.af p{font-size:14px}
+.bumpbox{margin-top:30px;background:#fff;color:var(--ink);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:center;border:2px dashed var(--coral)}
+.bumpbox .cb{flex:none;width:28px;height:28px;border-radius:7px;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.bumpbox p{color:var(--ink);font-size:15px}
+.bumpbox b{font-family:Poppins}
+/* for whom */
+.who{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+.who div{border-radius:18px;padding:24px}
+.who .yes{background:#E7F8F3}
+.who .no{background:#FFEDE8}
+.who h3{font-size:20px;margin-bottom:12px}
+.who li{list-style:none;padding:6px 0 6px 28px;position:relative;font-size:16px}
+.who .yes li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+.who .no li:before{content:"✕";position:absolute;left:0;color:var(--coral);font-weight:800}
+/* guarantee */
+.guar{display:flex;gap:28px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px}
+.seal{flex:none;width:130px;height:130px;border-radius:50%;background:conic-gradient(var(--amber),var(--coral),var(--amber));display:flex;align-items:center;justify-content:center}
+.seal div{width:110px;height:110px;border-radius:50%;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Poppins;font-weight:800;line-height:1}
+.seal b{font-size:40px;color:var(--amber)}
+.seal span{font-size:12px;letter-spacing:1px}
+/* npnm */
+.npnm{background:linear-gradient(135deg,#0B1020,#1B1440);color:#fff;border-radius:24px;padding:36px;position:relative;overflow:hidden}
+.npnm:after{content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.45),transparent 70%)}
+.npnm>*{position:relative}
+.npnm .tag{display:inline-block;background:var(--coral);font-family:Poppins;font-weight:700;font-size:12px;letter-spacing:2px;padding:5px 12px;border-radius:8px;margin-bottom:14px}
+.npnm h2{font-size:clamp(30px,5vw,48px)}
+.npnm p{color:#D7DAE5}
+.coupon{display:block;margin-top:18px;border:2px dashed var(--amber);border-radius:14px;padding:12px 18px;font-weight:600}
+.coupon b{font-family:Poppins;color:var(--amber);letter-spacing:1px}
+/* faq */
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:10px}
+summary{font-family:Poppins;font-weight:700;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--coral);font-size:24px;line-height:1}
+details[open] summary:after{content:"–"}
+details p{margin-top:10px;color:var(--muted);font-size:16px}
+footer{background:var(--navy);color:#8E94A8;font-size:13px;padding:36px 0 110px;text-align:center}
+footer b{color:#fff}
+/* sticky mobile cta */
+.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(11,16,32,.96);backdrop-filter:blur(8px);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:none;z-index:50;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,.1)}
+.sticky .pr2{color:#fff;font-size:13px;line-height:1.2}
+.sticky .pr2 b{font-family:Poppins;font-size:20px;color:var(--amber);display:block}
+.sticky .btn{flex:1;padding:14px 16px;font-size:16px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:860px){
+ section{padding:62px 0}
+ .hero .wrap{grid-template-columns:1fr}
+ .mock{height:400px;max-width:420px;margin:0 auto;width:100%}
+ .book{width:230px;height:340px;left:0}.book .t{font-size:54px}
+ .phone{width:160px;height:320px;right:0}
+ .checks,.creds,.who,.offer,.story{grid-template-columns:1fr}
+ .cost{grid-template-columns:repeat(2,1fr)}.cost div:last-child{grid-column:span 2}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .sci,.weeks,.anchors,.appgrid{grid-template-columns:1fr}
+ .weeks{grid-template-columns:1fr 1fr}
+ .guar{flex-direction:column;text-align:center}
+ .sticky.show{display:flex}
+ .pricebox{position:relative;top:0}
+ .avatar{max-width:320px;margin:0 auto;width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">🔥 Lote de lançamento: DESTRAVA por R$ 37 · acesso imediato</div>
+
+<!-- HERO -->
+<header class="hero">
+ <div class="wrap" style="display:block">
+  <div class="brand"><b>DESTRAVA<span style="color:var(--amber)">.</span></b><span>por @viniciusvieirafala</span></div>
+ </div>
+ <div class="wrap">
+  <div>
+   <div class="eyebrow">Para mulheres e homens que travam na hora de falar</div>
+   <h1>Você não é tímido demais.<br>Você só <em>nunca treinou.</em></h1>
+   <p class="sub">O DESTRAVA é o treino de <b style="color:#fff">15 minutos por dia, por 30 dias</b>, para perder a vergonha de falar em público, apresentar sem tremer e ser ouvido — mesmo sendo jovem.</p>
+   <div class="pills"><span class="pill"><b>30</b> dias de treino</span><span class="pill"><b>15 min</b> por dia</span><span class="pill">Baseado em <b>neurociência</b></span><span class="pill">Turma no <b>WhatsApp</b></span></div>
+   <a class="btn buy" href="https://pay.kiwify.com.br/QohdcH7" target="_blank" rel="noopener">QUERO DESTRAVAR AGORA<small>por apenas R$ 37 · acesso imediato</small></a>
+   <p class="cta-note">🔒 Compra segura pela Kiwify · Garantia de 7 dias</p>
+  </div>
+  <div class="mock" aria-hidden="true">
+   <div class="book"><span class="k">30 DIAS · 15 MIN/DIA</span><div class="t">DES<br>TRA<br><span>VA.</span></div><div class="s">O treino diário de comunicação, oratória e dicção para perder a vergonha de falar em público.</div><div class="a">Vinícius Vieira · <b>@viniciusvieirafala</b></div></div>
+   <div class="badge-app">+ App</div>
+   <div class="phone"><div class="screen"><div class="h"><b>DESTRAVA<span style="color:var(--amber)">.</span></b><div style="color:#C9CDDA;margin-top:4px">Seu diagnóstico</div></div><div class="ring"><i>68</i></div><div style="text-align:center;font-weight:700;color:#B07800">DESTRAVANDO</div><div class="lbl">Voz</div><div class="bar"><s style="width:72%;background:var(--amber)"></s></div><div class="lbl">Corpo</div><div class="bar"><s style="width:58%;background:var(--coral)"></s></div><div class="lbl">Mente</div><div class="bar"><s style="width:44%;background:var(--violet)"></s></div><div class="lbl">Palco</div><div class="bar"><s style="width:66%;background:var(--green)"></s></div></div></div>
+  </div>
+ </div>
+</header>
+
+<!-- IDENTIFICAÇÃO -->
+<section>
+ <div class="narrow">
+  <div class="eyebrow">Seja sincero</div>
+  <h2>Quantas dessas já aconteceram com você?</h2>
+  <p class="lead">Se você marcou pelo menos uma, este treino foi feito para você.</p>
+  <div class="checks reveal">
+   <div class="check">O coração dispara só de pensar em apresentar um trabalho.</div>
+   <div class="check">Você sabe a resposta, mas não levanta a mão.</div>
+   <div class="check">Na hora de falar, a voz some, treme ou sai baixinha.</div>
+   <div class="check">Dá branco e você esquece tudo que tinha ensaiado.</div>
+   <div class="check">Você não sabe o que fazer com as mãos nem para onde olhar.</div>
+   <div class="check">Depois da conversa, fica pensando: "eu devia ter falado…"</div>
+   <div class="check">Grava um vídeo, odeia a própria voz e apaga.</div>
+   <div class="check">Sente que todo mundo está te julgando enquanto você fala.</div>
+   <div class="check">Em reunião, alguém repete a sua ideia mais alto e leva o crédito.</div>
+   <div class="check">Você se desculpa antes de falar: "posso só falar uma coisinha?"</div>
+  </div>
+  <div class="callout reveal">Isso não é falta de talento. É o seu cérebro tentando te proteger de um perigo que <em>não existe.</em> E cérebro se treina.</div>
+ </div>
+</section>
+
+<!-- MULHERES -->
+<section style="padding-top:0">
+ <div class="narrow">
+  <div class="npnm reveal" style="background:linear-gradient(135deg,#2A1035,#0B1020)">
+   <div class="tag">PARA ELAS (E PARA ELES)</div>
+   <h2>Sua voz <em>merece</em> ser ouvida.</h2>
+   <p>A maior parte da minha comunidade é de mulheres. E eu ouço todo dia as mesmas histórias: a ideia que ninguém escutou na reunião, a voz que "some" na hora de apresentar, o medo de parecer arrogante quando fala com firmeza.</p>
+   <p style="margin-top:12px">O DESTRAVA te ajuda a falar com <b style="color:#fff">firmeza sem perder a delicadeza</b>: volume certo, frases que terminam com autoridade, postura de quem sabe o que está dizendo e coragem para ocupar o seu espaço. E serve para homens também: o método é o mesmo, e o treino funciona para qualquer pessoa.</p>
+  </div>
+ </div>
+</section>
+
+<!-- CUSTO -->
+<section class="dark">
+ <div class="narrow center">
+  <div class="eyebrow">O preço do silêncio</div>
+  <h2>Quem não fala, <em>perde.</em></h2>
+  <p class="lead">Toda vez que você deixa de falar, alguma coisa fica para trás. E ninguém te avisa o que você perdeu.</p>
+  <div class="cost reveal"><div><span>📚</span>Notas</div><div><span>💼</span>Vagas</div><div><span>🤝</span>Amizades</div><div><span>💰</span>Vendas</div><div><span>🚀</span>Oportunidades</div></div>
+  <p class="lead" style="margin-bottom:16px">Sabe aquela pessoa que nem é tão boa no que faz, mas sabe se comunicar, se vender e se promover — e tem muito mais destaque? Talvez você tenha uma <b style="color:#fff">mina de ouro parada</b>: talento de sobra, mas uma comunicação que ainda não está trabalhando a seu favor. Você não precisa ser o número 1 do mundo no que faz. Precisa ser ouvido.</p>
+  <p class="lead">A comunicação está presente desde a hora que você acorda: em casa, na escola, no trabalho, nos relacionamentos, nas redes. <b style="color:#fff">Com uma boa comunicação, você consegue se dar bem em tudo.</b></p>
+ </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section>
+ <div class="wrap">
+  <div class="story">
+   <div class="avatar reveal"><div class="mic"><svg viewBox="0 0 64 64"><rect x="22" y="6" width="20" height="32" rx="10" fill="currentColor"/><path d="M14 30a18 18 0 0 0 36 0" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round"/><line x1="32" y1="48" x2="32" y2="58" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></div><b>Vinícius Vieira</b><span>@viniciusvieirafala</span></div>
+   <div>
+    <div class="eyebrow">Quem vai treinar com você</div>
+    <h2>Eu era <em>tímido.</em></h2>
+    <p>Sim: o cara que hoje lidera vendas, grava vídeo todo dia e fala para milhares de pessoas já foi aquele que preferia ficar quieto no canto.</p>
+    <p>Quando eu decidi treinar a minha comunicação, tudo mudou. Hoje eu consigo fazer muito mais coisas do que antes. <b>As minhas vendas melhoraram. A minha vida pessoal melhorou. Tudo melhorou.</b></p>
+    <p>Sou músico, então sei na pele o que é subir no palco com frio na barriga. E aprendi que comunicação é igual instrumento: ninguém toca bonito no primeiro dia. <b>É treino.</b></p>
+    <div class="quote">"Tá com medo? Vai com medo mesmo. Mas vai preparado."</div>
+   </div>
+  </div>
+  <div class="stats reveal">
+   <div class="stat"><b>+130 mil</b><span>seguidores (Instagram + Facebook)</span></div>
+   <div class="stat"><b>+10 mi</b><span>de visualizações em vídeos</span></div>
+   <div class="stat"><b>+R$ 1 mi</b><span>em vendas como líder de vendas</span></div>
+   <div class="stat"><b>Vox2You</b><span>maior escola de oratória da América Latina</span></div>
+  </div>
+  <div class="creds reveal">
+   <div class="cred"><i>🎓</i><div><b>Administração e Marketing na PUC Campinas</b>, com foco em comportamento humano e no Marketing 7.0, que conversa com a neurociência. Também estudou no UNASP.</div></div>
+   <div class="cred"><i>🎤</i><div><b>Palestrante</b> sobre comunicação, oratória e criação de conteúdo para redes.</div></div>
+   <div class="cred"><i>🎷</i><div><b>Músico de palco</b>: saxofonista que se apresenta ao vivo.</div></div>
+   <div class="cred"><i>📚</i><div><b>Cursos com jornalistas e grandes palestrantes</b> do mercado, como Eduardo Brambilla (ex-repórter da EPTV), Polozi, Lucas Miguel e Schubert.</div></div>
+  </div>
+ </div>
+</section>
+
+<!-- CIÊNCIA -->
+<section class="dark">
+ <div class="wrap">
+  <div class="center narrow" style="padding:0">
+   <div class="eyebrow">Não é papo motivacional</div>
+   <h2>É <em>ciência</em> aplicada ao seu medo.</h2>
+   <p class="lead">O DESTRAVA usa o que a psicologia já descobriu sobre o medo de falar em público, explicado de um jeito simples.</p>
+  </div>
+  <div class="sci reveal">
+   <div><div class="n">¼</div><h3>O efeito holofote</h3><p>Num estudo da Universidade Cornell, quem vestia uma camiseta constrangedora achava que metade da sala tinha reparado. Só cerca de um quarto reparou. O julgamento está mais na sua cabeça do que na plateia.</p><small>Gilovich, Medvec e Savitsky, 2000</small></div>
+   <div><div class="n">👀</div><h3>A ilusão de transparência</h3><p>Quem fala em público acha que o nervosismo está muito mais visível do que realmente está. E quem fica sabendo disso antes faz discursos melhores.</p><small>Savitsky e Gilovich, 2003</small></div>
+   <div><div class="n">⚡</div><h3>"Eu estou animado"</h3><p>Em pesquisa de Harvard, quem disse "estou animado" antes de discursar foi avaliado como mais persuasivo, competente e confiante do que quem tentou se acalmar.</p><small>Alison Wood Brooks, 2014</small></div>
+  </div>
+ </div>
+</section>
+
+<!-- MÉTODO -->
+<section>
+ <div class="wrap">
+  <div class="narrow center" style="padding:0">
+   <div class="eyebrow">Como funciona</div>
+   <h2>4 semanas. 4 pilares. <em>Uma nova voz.</em></h2>
+   <p class="lead">Cada dia tem 15 minutos: 5 de aquecimento, 7 de treino e 3 de um desafio real fora do quarto — na escola, no trabalho ou em casa.</p>
+  </div>
+  <div class="weeks reveal">
+   <div class="wk" style="--k:var(--amber)"><div class="d">SEMANA 1</div><h3>Voz</h3><p>Respiração, dicção, volume, ritmo, pausas e tons de voz.</p></div>
+   <div class="wk" style="--k:var(--coral)"><div class="d">SEMANA 2</div><h3>Corpo</h3><p>Postura, contato visual, gestos, expressão e fim dos vícios de linguagem.</p></div>
+   <div class="wk" style="--k:var(--violet)"><div class="d">SEMANA 3</div><h3>Mente</h3><p>Medo de palco, julgamento, escada da coragem e como se recuperar de um branco.</p></div>
+   <div class="wk" style="--k:var(--green)"><div class="d">SEMANA 4</div><h3>Palco</h3><p>Estruturas de fala, histórias, improviso, pitch e sua apresentação final.</p></div>
+  </div>
+  <div class="narrow" style="padding:0;margin-top:50px">
+   <h3 class="pop" style="font-size:24px;margin-bottom:6px">💡 Dica do Vini: os horários-âncora</h3>
+   <p class="lead" style="font-size:17px">O maior inimigo do treino é o esquecimento. Por isso você "gruda" o treino em momentos que todo mundo tem no dia:</p>
+   <div class="anchors reveal">
+    <div class="anc"><span>🍽️</span><b>Antes do almoço</b>15 minutos do treino principal.</div>
+    <div class="anc"><span>🚿</span><b>No banho</b>Treino de voz e trava-línguas.</div>
+    <div class="anc"><span>🌙</span><b>Antes de dormir</b>3 minutos de fechamento do dia.</div>
+   </div>
+   <h3 class="pop" style="font-size:24px;margin:44px 0 0">Os 7 princípios do Método Vini</h3>
+   <div class="principles reveal">
+    <div class="pr"><b>Tá com medo? Vai com medo.</b><p>Mas vai preparado. Medo + preparo = coragem.</p></div>
+    <div class="pr"><b>O julgamento está na sua cabeça.</b><p>As pessoas têm a vida delas. Ninguém repara tanto quanto você pensa.</p></div>
+    <div class="pr"><b>Quem julga, se projeta.</b><p>A crítica diz mais sobre quem fala do que sobre você.</p></div>
+    <div class="pr"><b>Quem não fala, perde.</b><p>O silêncio também tem preço.</p></div>
+    <div class="pr"><b>Comunicação é treino, não dom.</b><p>Apareça todo dia. O resultado vem.</p></div>
+    <div class="pr"><b>O silêncio é seu aliado.</b><p>Quem pausa passa credibilidade. Quem pausa, manda na sala.</p></div>
+    <div class="pr"><b>Fale com intenção.</b><p>Linguagem do seu público, propósito claro, rapport.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- O QUE VOCÊ RECEBE -->
+<section id="oferta" style="background:#F3EEE4">
+ <div class="wrap">
+  <div class="narrow center" style="padding:0">
+   <div class="eyebrow">O que você recebe</div>
+   <h2>Tudo para você <em>destravar</em> em 30 dias</h2>
+  </div>
+  <div class="offer">
+   <div class="items reveal">
+    <div class="item"><div class="ic">📘</div><div><h3>E-book DESTRAVA</h3><p>Mais de 50 páginas com tabelas e diagramas: a história da oratória, Ethos-Pathos-Logos, a neurociência do medo, o Método Vini e as técnicas de voz, olhar, gestos, palco, analogias e histórias — tudo simples de entender.</p></div></div>
+    <div class="item"><div class="ic">🎯</div><div><h3>Rapport, as 4 vozes e o teste do WhatsApp</h3><p>Espelhamento e os tipos de rapport usados em vendas, as vozes de ouro, prata, bronze e veludo e o teste real para eliminar o “né” e o “éé”.</p></div></div>
+    <div class="item"><div class="ic">📱</div><div><h3>Módulo: conteúdo viral sem blá-blá-blá <span class="tag">BÔNUS</span></h3><p>Ganchos que dão choque visual, gestual e auditivo, a técnica de começar pelo “como” e o roteiro DESTRAVA para vídeos curtos.</p></div></div>
+    <div class="item"><div class="ic">🗓️</div><div><h3>Plano de 30 dias</h3><p>Um treino e um desafio real para cada dia, com aquecimento de 5 minutos, banco de trava-línguas e 20 temas de improviso.</p></div></div>
+    <div class="item"><div class="ic">🚨</div><div><h3>Kit de emergência</h3><p>O que fazer nos 5 minutos antes de falar e na hora que der branco.</p></div></div>
+    <div class="item"><div class="ic">👥</div><div><h3>Turma DESTRAVA no WhatsApp <span class="tag">INCLUSO</span></h3><p>Nova turma aberta, seja uma das primeiras pessoas: avisos gerais, dúvidas, networking, desafio do dia e palco aberto para mandar seus vídeos, e o mural Antes × Depois.</p></div></div>
+    <div class="item"><div class="ic">🎟️</div><div><h3>Cupom para 2027 <span class="tag">BÔNUS</span></h3><p>O DESTRAVA não inclui videoaulas. Elas serão lançadas em 2027, no curso completo Negar Palco Nunca Mais, e quem entra no DESTRAVA agora garante um desconto exclusivo.</p></div></div>
+    <div class="item bump"><div class="ic">📒</div><div><h3>Caderno de Exercícios <span class="tag" style="background:#FFE3DB;color:#C8361A">OPCIONAL · NO CHECKOUT</span></h3><p>Mais de 170 exercícios práticos, sem enrolação: 41 trava-línguas, 12 grades de sílabas (TRA, PRA, BLA…), respiração, leitura em voz alta, escrita, palco, improviso, vendas, vídeo e 10 livros recomendados.</p></div></div>
+    <div class="item bump"><div class="ic">📱</div><div><h3>App DESTRAVA <span class="tag" style="background:#FFE3DB;color:#C8361A">OPCIONAL · + R$ 9,90</span></h3><p>Adicione no checkout: diagnóstico interativo com sua nota de 0 a 100, jornada dos 30 dias, aquecimento guiado com cronômetro e mais.</p></div></div>
+   </div>
+   <div class="pricebox reveal">
+    <div class="lot">LOTE DE LANÇAMENTO</div>
+    <div class="pop" style="font-size:20px;margin-bottom:8px">DESTRAVA completo</div>
+    <div class="p"><sup>R$</sup>37</div>
+    <div class="per">pagamento único · acesso imediato</div>
+    <ul>
+     <li>E-book DESTRAVA</li>
+     <li>Plano de 30 dias + kit de emergência</li>
+     <li>Turma DESTRAVA no WhatsApp</li>
+     <li>Cupom exclusivo Negar Palco Nunca Mais</li>
+     <li class="opt">App DESTRAVA por + R$ 9,90 (opcional no checkout)</li>
+     <li class="opt">Caderno de Exercícios com +170 exercícios (opcional no checkout)</li>
+    </ul>
+    <p style="font-size:13px;opacity:.75;margin:-4px 0 16px;line-height:1.5">ℹ️ Não inclui videoaulas. Elas serão lançadas em 2027, e quem entrar no DESTRAVA terá desconto exclusivo.</p>
+    <a class="btn buy" href="https://pay.kiwify.com.br/QohdcH7" target="_blank" rel="noopener">QUERO DESTRAVAR AGORA</a>
+    <div class="secure"><span>🔒 Compra segura</span><span>⚡ Acesso imediato</span><span>🛡️ 7 dias de garantia</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- APP -->
+<section class="dark">
+ <div class="wrap">
+  <div class="narrow center" style="padding:0">
+   <div class="eyebrow">Adicional opcional no checkout</div>
+   <h2>Quer treinar com o <em>App DESTRAVA</em>?</h2>
+   <p class="lead">Por só mais R$ 9,90, você leva o seu treinador de bolso. Funciona no navegador do celular, sem baixar nada.</p>
+  </div>
+  <div class="appgrid reveal">
+   <div class="af"><span>📊</span><b>Diagnóstico próprio</b><p>12 perguntas, nota de 0 a 100, seu nível e sua porcentagem em Voz, Corpo, Mente e Palco. No Dia 30, veja o Antes × Depois.</p></div>
+   <div class="af"><span>🗓️</span><b>Jornada dos 30 dias</b><p>Treino do dia, desafio, anotações e sequência de dias para não quebrar a corrente.</p></div>
+   <div class="af"><span>🔥</span><b>Aquecimento guiado</b><p>As 5 etapas com cronômetro, uma de cada vez.</p></div>
+   <div class="af"><span>🫁</span><b>Respiração 4-4-6</b><p>Círculo animado para acalmar o corpo antes de falar.</p></div>
+   <div class="af"><span>🎲</span><b>Improviso e trava-línguas</b><p>Sorteador de temas com cronômetro e de trava-línguas.</p></div>
+   <div class="af"><span>🚫</span><b>Caça-vícios</b><p>Conte seus "né", "tipo" e "ééé" e veja eles sumirem.</p></div>
+  </div>
+  <div class="bumpbox reveal"><div class="cb">✓</div><p><b>No checkout, marque "Adicionar App DESTRAVA — R$ 9,90".</b> Se preferir, compre só o e-book: o treino funciona com papel e caneta também.</p></div>
+ </div>
+</section>
+
+<!-- PARA QUEM -->
+<section>
+ <div class="narrow">
+  <div class="eyebrow center">Seja honesto com você</div>
+  <h2 class="center">Para quem é o DESTRAVA</h2>
+  <div class="who reveal">
+   <div class="yes"><h3>É para você se…</h3><ul><li>É mulher e quer ser ouvida — em casa, na sala de aula, na reunião, nas vendas e nas redes</li><li>É homem e quer falar com segurança, sem travar</li><li>Trava para apresentar trabalhos, falar em reuniões ou gravar vídeos</li><li>Quer perder a vergonha mesmo sendo jovem</li><li>Topa treinar 15 minutos por dia</li><li>Quer ser ouvido na escola, no trabalho, nas vendas e na vida</li></ul></div>
+   <div class="no"><h3>Não é para você se…</h3><ul><li>Procura uma fórmula mágica sem prática</li><li>Não quer falar em voz alta nem se gravar</li><li>Precisa de tratamento fonoaudiológico ou psicológico (procure um profissional)</li></ul></div>
+  </div>
+ </div>
+</section>
+
+<!-- GARANTIA -->
+<section style="padding-top:0">
+ <div class="narrow">
+  <div class="guar reveal">
+   <div class="seal"><div><b>7</b><span>DIAS</span></div></div>
+   <div><h3 class="pop" style="font-size:26px;margin-bottom:8px">Risco zero para você</h3><p class="lead" style="font-size:17px">Você tem 7 dias para conhecer o material. Se achar que não é para você, é só pedir o reembolso pela Kiwify e receber 100% do valor de volta. Sem perguntas.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- NPNM -->
+<section style="padding-top:0">
+ <div class="narrow">
+  <div class="npnm reveal">
+   <div class="tag">EM 2027</div>
+   <h2>NEGAR PALCO<br><em>NUNCA MAIS</em></h2>
+   <p>O DESTRAVA é o primeiro passo. Em 2027 chega o curso completo do Vinícius Vieira Fala: muito mais estruturado, com videoaulas de verdade e acompanhamento mais de perto.</p>
+   <div class="coupon">🎟️ As videoaulas não fazem parte do DESTRAVA: elas chegam em 2027, e quem entrar no DESTRAVA terá um <b>desconto exclusivo</b> no lançamento</div>
+  </div>
+ </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding-top:0">
+ <div class="narrow">
+  <div class="eyebrow center">Dúvidas frequentes</div>
+  <h2 class="center">Perguntas que todo mundo faz</h2>
+  <details><summary>Como eu recebo o material?</summary><p>Logo após a confirmação do pagamento, você recebe o acesso por e-mail e na área de membros da Kiwify: o e-book em PDF, o convite da Turma DESTRAVA e, se você adicionar, o link do App.</p></details>
+  <details><summary>O DESTRAVA tem videoaulas?</summary><p>Não. O DESTRAVA é um programa de treino com e-book, plano de 30 dias e a Turma no WhatsApp. As videoaulas serão lançadas em 2027, no curso Negar Palco Nunca Mais, e quem entrar no DESTRAVA terá um desconto exclusivo.</p></details>
+  <details><summary>Funciona para quem é muito tímido?</summary><p>Foi feito exatamente para isso. O treino começa com exercícios que você faz sozinho, no seu quarto, e vai subindo um degrau por vez até o palco.</p></details>
+  <details><summary>Tenho pouco tempo. Consigo fazer?</summary><p>São 15 minutos por dia, encaixados em horários que você já tem: antes do almoço, no banho e antes de dormir.</p></details>
+  <details><summary>O que é o Caderno de Exercícios?</summary><p>Um PDF extra, opcional no checkout, só com prática: mais de 170 exercícios de dicção, trava-línguas, respiração, voz, leitura, escrita, palco, improviso, vendas e vídeo, além de 10 livros recomendados. Ideal para quem quer treinar ainda mais.</p></details>
+  <details><summary>Preciso do App para fazer o treino?</summary><p>Não. O e-book tem tudo para você treinar com papel e caneta. O App é um adicional opcional de R$ 9,90 que deixa o treino mais prático, com diagnóstico, cronômetros e sorteadores.</p></details>
+  <details><summary>O App precisa ser baixado?</summary><p>Não. Ele abre direto no navegador do celular ou do computador. Você pode salvar o atalho na tela inicial.</p></details>
+  <details><summary>Serve para adultos também?</summary><p>Sim. A linguagem é pensada para jovens, mas as técnicas funcionam para qualquer idade: escola, faculdade, trabalho, vendas e redes sociais.</p></details>
+  <details><summary>Isso substitui fonoaudiólogo ou psicólogo?</summary><p>Não. O DESTRAVA é um treino de comunicação. Se você sente dor ao falar, rouquidão persistente ou uma ansiedade que trava sua vida, procure um profissional.</p></details>
+  <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia. É só pedir o reembolso pela Kiwify.</p></details>
+ </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="dark center">
+ <div class="narrow">
+  <h2>Daqui a 30 dias, você vai estar <em>falando.</em></h2>
+  <p class="lead" style="margin-bottom:28px">Ou vai estar no mesmo lugar, pensando no que devia ter dito. A escolha é sua. Mas lembra: tá com medo? Vai com medo mesmo.</p>
+  <a class="btn buy" href="https://pay.kiwify.com.br/QohdcH7" target="_blank" rel="noopener">QUERO DESTRAVAR AGORA<small>R$ 37 · lote de lançamento</small></a>
+  <p class="cta-note">🔒 Compra segura pela Kiwify · Acesso imediato · Garantia de 7 dias</p>
+ </div>
+</section>
+
+<footer>
+ <p><b>DESTRAVA</b> · Vinícius Vieira Fala · @viniciusvieirafala</p>
+ <p style="margin-top:8px">Este produto não substitui acompanhamento fonoaudiológico ou psicológico. Resultados dependem da prática de cada pessoa.</p>
+ <p style="margin-top:8px">© 2026 Vinícius Vieira Fala. Todos os direitos reservados.</p>
+</footer>
+
+<div class="sticky"><div class="pr2">Lote de lançamento<b>R$ 37</b></div><a class="btn buy" href="https://pay.kiwify.com.br/QohdcH7" target="_blank" rel="noopener">QUERO DESTRAVAR</a></div>
+
+<script>
+// >>> Cole aqui o link do checkout da Kiwify:
+const CHECKOUT_URL = "https://pay.kiwify.com.br/QohdcH7";
+document.querySelectorAll(".buy").forEach(a=>{
+  if(CHECKOUT_URL){a.href=CHECKOUT_URL;a.target="_blank";a.rel="noopener"}
+});
+const st=document.querySelector(".sticky");addEventListener("scroll",()=>st.classList.toggle("show",scrollY>650),{passive:true});
+try{
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+}catch(e){document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"))}
+</script>
+</body>
+</html>

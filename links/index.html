@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vinícius Vieira Fala | Meus links</title>
+<meta name="description" content="Comunicação, oratória e posicionamento. Links oficiais do Vinícius Vieira (@viniciusvieirafala).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital@1&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1020;--amber:#FFB400;--coral:#FF5A36;--cream:#FBF7F0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--navy);color:#fff;min-height:100vh;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;top:-320px;left:50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.26),rgba(255,90,54,.08) 40%,transparent 66%);pointer-events:none}
+main{position:relative;max-width:480px;margin:0 auto;padding:40px 20px 56px;text-align:center}
+.hello{font-family:Poppins;font-weight:600;font-size:12px;letter-spacing:3px;color:var(--amber);margin-bottom:22px}
+.avatar{width:112px;height:112px;border-radius:50%;margin:0 auto 16px;padding:4px;background:conic-gradient(var(--amber),var(--coral),var(--amber));position:relative}
+.avatar .in{width:100%;height:100%;border-radius:50%;background:#141B36;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar svg{width:46px;height:46px;color:var(--amber)}
+.live{position:absolute;right:6px;bottom:6px;width:20px;height:20px;border-radius:50%;background:#18C29C;border:3px solid var(--navy)}
+h1{font-family:Poppins;font-size:30px;letter-spacing:-.5px}
+h1 span{color:var(--amber)}
+.tag{color:#C9CDDA;margin-top:6px;font-size:15px}
+.roles{color:#8E94A8;font-size:12.5px;margin-top:6px;letter-spacing:.3px}
+.stats{display:flex;gap:10px;margin:20px 0}
+.stat{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 8px}
+.stat b{display:block;font-family:Poppins;font-size:20px;color:var(--amber)}
+.stat span{font-size:11.5px;color:#C9CDDA}
+details{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;text-align:left;margin-bottom:22px}
+summary{list-style:none;cursor:pointer;padding:14px 16px;font-weight:600;font-size:14.5px;display:flex;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--amber);font-size:20px;line-height:1}
+details[open] summary:after{content:"–"}
+details ul{list-style:none;padding:0 16px 14px}
+details li{font-size:14px;color:#D7DAE5;padding:6px 0 6px 22px;position:relative;line-height:1.45}
+details li:before{content:"•";position:absolute;left:6px;color:var(--amber)}
+.label{font-size:12px;letter-spacing:2px;color:#8E94A8;text-align:left;margin:0 0 10px 4px;font-weight:600}
+a.link{display:flex;align-items:center;gap:14px;text-decoration:none;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 16px;margin-bottom:10px;text-align:left;transition:transform .15s,background .15s}
+a.link:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+a.link .ic{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(255,180,0,.12);display:flex;align-items:center;justify-content:center;font-size:22px}
+a.link b{display:block;font-size:15px}
+a.link small{color:#9EA4B8;font-size:13px}
+a.link .ar{margin-left:auto;color:var(--amber);font-size:18px}
+a.hero{display:block;text-decoration:none;color:var(--navy);background:linear-gradient(135deg,#FFC93C,var(--amber) 40%,#FF8A1F);border-radius:22px;padding:22px 20px 20px;margin-bottom:14px;text-align:left;position:relative;overflow:hidden;animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,180,0,.55),0 14px 34px rgba(255,150,0,.35);transform:scale(1)}50%{box-shadow:0 0 0 12px rgba(255,180,0,0),0 18px 40px rgba(255,150,0,.5);transform:scale(1.02)}}
+a.hero .shine{position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 2.8s ease-in-out infinite}
+@keyframes shine{0%{left:-60%}60%,100%{left:130%}}
+a.hero .top{display:flex;justify-content:space-between;align-items:center;position:relative}
+a.hero .k{background:var(--navy);color:var(--amber);font-family:Poppins;font-weight:700;font-size:11px;letter-spacing:1.5px;padding:5px 10px;border-radius:6px}
+a.hero .price{font-family:Poppins;font-weight:700;font-size:15px;background:#fff;color:var(--coral);padding:4px 10px;border-radius:20px}
+a.hero .big{font-family:Poppins;font-weight:700;font-size:46px;line-height:1;letter-spacing:-2px;margin:12px 0 4px;position:relative}
+a.hero .big span{color:#fff}
+a.hero h2{font-family:Poppins;font-size:19px;line-height:1.2;margin-bottom:6px;position:relative}
+a.hero p{font-size:13.5px;font-weight:600;opacity:.85;position:relative}
+a.hero .cta{display:block;text-align:center;margin-top:14px;background:var(--navy);color:#fff;font-family:Poppins;font-weight:700;font-size:16px;letter-spacing:.5px;padding:14px;border-radius:12px;position:relative}
+@media (prefers-reduced-motion:reduce){a.hero,a.hero .shine{animation:none}}
+a.ment{display:block;text-decoration:none;background:var(--cream);color:#141A2E;border-radius:20px;padding:18px 20px;margin-bottom:10px;text-align:left}
+a.ment .k{font-family:Poppins;font-weight:700;font-size:10.5px;letter-spacing:1.5px;color:var(--coral)}
+a.ment h2{font-family:Poppins;font-size:21px;line-height:1.15;margin:6px 0 4px}
+a.ment p{font-size:13px;color:#5E6577}
+a.ment .cta{display:inline-block;margin-top:10px;color:var(--coral);font-weight:700;font-size:14px}
+footer{margin-top:30px;color:#6F768C;font-size:12.5px}
+footer b{display:block;font-family:Poppins;font-size:18px;color:#fff;margin-bottom:4px}
+footer i{font-family:Lora;color:#C9CDDA}
+</style>
+</head>
+<body>
+<main>
+  <div class="hello">SEJA BEM-VINDO(A), COMUNICADOR(A).</div>
+  <div class="avatar"><div class="in"><img src="foto.jpg" alt="Vinícius Vieira" onerror="this.outerHTML='<svg viewBox=&quot;0 0 64 64&quot;><rect x=&quot;22&quot; y=&quot;6&quot; width=&quot;20&quot; height=&quot;32&quot; rx=&quot;10&quot; fill=&quot;currentColor&quot;/><path d=&quot;M14 30a18 18 0 0 0 36 0&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;5&quot; fill=&quot;none&quot; stroke-linecap=&quot;round&quot;/><line x1=&quot;32&quot; y1=&quot;48&quot; x2=&quot;32&quot; y2=&quot;58&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;5&quot; stroke-linecap=&quot;round&quot;/></svg>'"></div><span class="live"></span></div>
+  <h1>Vinícius Vieira<span>.</span></h1>
+  <p class="tag">Comunicação, oratória e posicionamento.</p>
+  <p class="roles">Ex-tímido · Professor de música · Palestrante · Líder de vendas</p>
+
+  <div class="stats">
+    <div class="stat"><b>+130 mil</b><span>seguidores</span></div>
+    <div class="stat"><b>+10 mi</b><span>visualizações</span></div>
+    <div class="stat"><b>+R$ 1 mi</b><span>em vendas</span></div>
+  </div>
+
+  <details>
+    <summary>Conheça minha trajetória</summary>
+    <ul>
+      <li>Graduando em Administração e Marketing na PUC-Campinas.</li>
+      <li>Formação em comunicação e oratória na Vox2You e cursos com jornalistas e grandes palestrantes, como Eduardo Brambilla e Polozi.</li>
+      <li>Formações em gestão de pessoas e liderança.</li>
+      <li>Professor de saxofone e música, com experiência didática com crianças e pessoas autistas.</li>
+      <li>Líder de vendas e diretor da Casa das Organistas, loja especializada em órgãos eletrônicos.</li>
+    </ul>
+  </details>
+
+  <div class="label">ME CONHEÇA MELHOR</div>
+
+  <a class="hero" href="https://viniciusvieirafala.com.br">
+    <span class="shine"></span>
+    <div class="top"><span class="k">🔥 LANÇAMENTO</span><span class="price">R$ 37</span></div>
+    <div class="big">DESTRAVA<span>.</span></div>
+    <h2>Perca a vergonha de falar em público em 30 dias</h2>
+    <p>15 minutos por dia · Método Vini · Turma no WhatsApp</p>
+    <span class="cta">QUERO DESTRAVAR AGORA →</span>
+  </a>
+
+  <a class="ment" href="https://mentoria.viniciusvieirafala.com.br">
+    <div class="k">MENTORIA DE COMUNICAÇÃO</div>
+    <h2>Travar em público nunca mais.</h2>
+    <p>15 dias de acompanhamento · a partir dos 16 anos.</p>
+    <span class="cta">Conhecer a mentoria ↗</span>
+  </a>
+
+  <a class="link" href="https://wa.me/message/65GQGRJUJ4BVA1"><span class="ic">💬</span><span><b>Fale comigo no WhatsApp</b><small>Vamos conversar.</small></span><span class="ar">↗</span></a>
+  <a class="link" href="https://www.instagram.com/viniciusvieirafala/"><span class="ic">📸</span><span><b>Instagram · +63 mil</b><small>@viniciusvieirafala</small></span><span class="ar">↗</span></a>
+  <a class="link" href="https://www.facebook.com/share/19YR9sTx4r/?mibextid=wwXIfr"><span class="ic">👍</span><span><b>Facebook · +68 mil</b><small>Mais conteúdos sobre comunicação.</small></span><span class="ar">↗</span></a>
+  <a class="link" href="mailto:viniciusvieirafala@gmail.com?subject=Propostas%20e%20parcerias%20%7C%20Vin%C3%ADcius%20Vieira%20Fala"><span class="ic">🤝</span><span><b>Propostas e parcerias</b><small>viniciusvieirafala@gmail.com</small></span><span class="ar">↗</span></a>
+
+  <footer><b>vinícius vieira <span style="color:var(--amber)">fala.</span></b><i>Boas conversas começam com clareza.</i></footer>
+</main>
+</body>
+</html>

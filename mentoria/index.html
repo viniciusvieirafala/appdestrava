@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mentoria de Comunicação | Vinícius Vieira Fala</title>
+<meta name="description" content="Mentoria individual de comunicação e oratória com Vinícius Vieira. Preencha o formulário de interesse.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital@1&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1020;--navy2:#141B36;--amber:#FFB400;--coral:#FF5A36;--cream:#FBF7F0;--ink:#141A2E;--muted:#5E6577;--line:#E6DFD2;--green:#18C29C;--violet:#7C5CFF}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--cream);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Poppins,sans-serif;line-height:1.12;letter-spacing:-.02em}
+em{font-style:normal;color:var(--coral)}
+.dark em{color:var(--amber)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+.narrow{max-width:720px;margin:0 auto;padding:0 22px}
+section{padding:76px 0}
+.dark{background:var(--navy);color:#fff}
+.dark p{color:#D7DAE5}
+.eyebrow{font-family:Poppins;font-weight:700;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--coral);margin-bottom:12px}
+.dark .eyebrow{color:var(--amber)}
+h2{font-size:clamp(28px,4.6vw,42px);margin-bottom:16px}
+.lead{font-size:clamp(17px,2.2vw,19px);color:var(--muted)}
+.dark .lead{color:#C9CDDA}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--amber),#FF8A1F);color:var(--navy);font-family:Poppins;font-weight:700;font-size:17px;padding:16px 30px;border-radius:14px;text-decoration:none;box-shadow:0 10px 30px rgba(255,150,0,.35);border:none;cursor:pointer}
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;padding:30px 0 80px}
+.hero:before{content:"";position:absolute;top:-260px;left:50%;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,180,0,.26),rgba(255,90,54,.09) 38%,transparent 66%)}
+.hero>*{position:relative}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:56px}
+.nav a{color:#fff;text-decoration:none}
+.logo{font-family:Poppins;font-weight:700;font-size:19px}
+.logo span{color:var(--amber)}
+.nav .links a{font-size:14px;color:#C9CDDA;margin-left:18px}
+.hero h1{font-size:clamp(40px,7vw,68px);margin:14px 0 18px}
+.hero h1 em{color:var(--amber)}
+.hero p.sub{font-size:clamp(17px,2.3vw,20px);color:#D7DAE5;max-width:620px;margin-bottom:26px}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.pill{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);border-radius:30px;padding:7px 14px;font-size:14px;font-weight:600}
+.by{margin-top:22px;font-size:14px;color:#9EA4B8}
+.by b{color:var(--amber)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px}
+.stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;text-align:center}
+.stat b{display:block;font-family:Poppins;font-size:26px;color:var(--amber);line-height:1.1}
+.stat span{font-size:12.5px;color:#C9CDDA}
+.vids{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.vid{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;transition:transform .15s}
+.vid:hover{transform:translateY(-3px)}
+.vid .n{font-family:Poppins;font-weight:700;font-size:12px;letter-spacing:1.5px;color:var(--coral)}
+.vid h3{font-size:17px;margin:6px 0 10px}
+.vid span{font-size:14px;color:var(--coral);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+.chip{background:#fff;border:1.5px solid var(--line);border-radius:30px;padding:9px 16px;font-weight:600;font-size:15px}
+.example{background:var(--navy);color:#fff;border-radius:20px;padding:26px;margin-top:10px}
+.example .q{font-family:Lora;font-style:italic;font-size:20px;line-height:1.45;margin:12px 0}
+.example small{color:#9EA4B8}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.step{background:#fff;border:1px solid var(--line);border-top:5px solid var(--k);border-radius:16px;padding:20px}
+.step .n{font-family:Poppins;font-weight:700;font-size:30px;color:var(--k);line-height:1}
+.step .t{font-family:Poppins;font-weight:700;font-size:11.5px;letter-spacing:1.5px;color:var(--muted);margin:10px 0 4px}
+.step h3{font-size:17px;margin-bottom:6px}
+.step p{font-size:14.5px;color:var(--muted)}
+.gets{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
+.get{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:22px;display:flex;gap:16px}
+.get .ic{flex:none;font-size:28px}
+.get h3{font-size:18px;margin-bottom:6px;color:#fff}
+.get p{font-size:15px}
+.get .tag{display:inline-block;margin-top:10px;font-family:Poppins;font-weight:700;font-size:11px;letter-spacing:1.2px;color:var(--amber)}
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}
+.avatar{aspect-ratio:1/1;border-radius:24px;background:radial-gradient(circle at 50% 30%,rgba(255,180,0,.45),transparent 60%),var(--navy);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;overflow:hidden;position:relative}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.avatar .mic{width:84px;height:84px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.avatar .mic svg{width:44px;height:44px;color:var(--navy)}
+.about p{margin-bottom:14px}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.cred{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;font-size:14.5px;display:flex;gap:10px}
+.note{background:#FFF3D1;border-left:6px solid var(--amber);border-radius:12px;padding:16px 18px;font-size:15px;margin-top:20px}
+.form-wrap{background:#fff;color:var(--ink);border-radius:24px;padding:32px;margin-top:30px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.fs{border:none;margin-bottom:22px}
+.fs legend{font-family:Poppins;font-weight:700;font-size:13px;letter-spacing:2px;color:var(--coral);margin-bottom:12px}
+label{display:block;font-weight:600;font-size:15px;margin:14px 0 6px}
+.hint{font-size:13px;color:var(--muted);margin-top:4px}
+input[type=text],input[type=tel],input[type=number],input[type=email],select,textarea{width:100%;font:inherit;font-size:16px;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;background:#FDFBF7;color:var(--ink)}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(255,180,0,.25)}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:14px}
+.check input{margin-top:4px;width:18px;height:18px}
+.form-wrap .btn{width:100%;margin-top:18px;font-size:18px}
+.small{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}
+.flow3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.flow3 div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px;font-size:15px}
+.flow3 b{display:block;font-family:Poppins;font-size:24px;color:var(--amber)}
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:10px}
+summary{font-family:Poppins;font-weight:700;font-size:16.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--coral);font-size:24px;line-height:1}
+details[open] summary:after{content:"–"}
+details p{margin-top:10px;color:var(--muted);font-size:15.5px}
+footer{background:var(--navy);color:#8E94A8;font-size:13px;padding:36px 0;text-align:center}
+footer a{color:var(--amber)}
+@media(max-width:820px){
+ section{padding:58px 0}
+ .nav .links{display:none}
+ .stats,.vids{grid-template-columns:1fr 1fr}
+ .steps{grid-template-columns:1fr 1fr}
+ .gets,.about,.creds,.flow3{grid-template-columns:1fr}
+ .avatar{max-width:300px;width:100%;margin:0 auto}
+ .form-wrap{padding:22px 18px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <div class="wrap">
+  <div class="nav"><a class="logo" href="https://vip.viniciusvieirafala.com.br">vinícius vieira <span>fala.</span></a><div class="links"><a href="#como-funciona">Como funciona</a><a href="#sobre">Quem sou</a><a href="#interesse">Tenho interesse</a></div></div>
+  <div class="eyebrow">Mentoria individual de comunicação e oratória</div>
+  <h1>Fale com clareza.<br><em>Se posicione.</em></h1>
+  <p class="sub">Organize suas ideias, construa bons argumentos e encontre uma forma de se expressar que faça sentido para você — com acompanhamento individual, de perto.</p>
+  <div class="pills"><span class="pill">🗓️ 15 dias de acompanhamento</span><span class="pill">💻 Online e individual</span><span class="pill">🎯 Aplicado à sua vida real</span></div>
+  <a class="btn" href="#interesse">Quero saber mais ↓</a>
+  <p class="by">Com Vinícius Vieira · <b>@viniciusvieirafala</b></p>
+  <div class="stats">
+   <div class="stat"><b>+130 mil</b><span>seguidores nas redes</span></div>
+   <div class="stat"><b>+10 mi</b><span>de visualizações</span></div>
+   <div class="stat"><b>+R$ 1 mi</b><span>em vendas</span></div>
+   <div class="stat"><b>Vox2You</b><span>formação em oratória</span></div>
+  </div>
+ </div>
+</header>
+
+<section>
+ <div class="wrap">
+  <div class="eyebrow">Comunicação na prática</div>
+  <h2>Me veja <em>comunicando.</em></h2>
+  <p class="lead">Alguns dos meus conteúdos sobre comunicação e oratória. Assista e conheça meu jeito de ensinar.</p>
+  <div class="vids">
+   <a class="vid" href="https://www.instagram.com/reel/DcHaBQMBMUI/" target="_blank" rel="noopener"><div class="n">01 / CLAREZA</div><h3>Vícios de linguagem</h3><span>Ver no Instagram ↗</span></a>
+   <a class="vid" href="https://www.instagram.com/reel/Db_sxx0B6Sv/" target="_blank" rel="noopener"><div class="n">02 / ENTONAÇÃO</div><h3>O tom da sua fala</h3><span>Ver no Instagram ↗</span></a>
+   <a class="vid" href="https://www.instagram.com/reel/DeXpVRtxOpz/" target="_blank" rel="noopener"><div class="n">03 / ORATÓRIA</div><h3>Treino de oratória</h3><span>Ver no Instagram ↗</span></a>
+   <a class="vid" href="https://www.instagram.com/reel/DdXvt4pxF-R/" target="_blank" rel="noopener"><div class="n">04 / EXPRESSÃO</div><h3>Sobre se expressar</h3><span>Ver no Instagram ↗</span></a>
+  </div>
+ </div>
+</section>
+
+<section style="padding-top:0">
+ <div class="narrow">
+  <div class="eyebrow">Seu desafio como ponto de partida</div>
+  <h2>O que você quer <em>conseguir comunicar?</em></h2>
+  <p class="lead">A mentoria começa com uma situação real da sua vida. Pode ser defender uma ideia, responder a uma objeção ou se posicionar em uma conversa importante.</p>
+  <div class="chips"><span class="chip">💡 Defender uma ideia</span><span class="chip">🛡️ Responder a uma objeção</span><span class="chip">🙋 Fazer um pedido</span><span class="chip">🎤 Apresentar em público</span><span class="chip">💰 Vender melhor</span></div>
+  <div class="example"><div class="eyebrow" style="margin:0">Exemplo de treino</div><div class="q">“Proponho testar esse formato por uma semana. Ele pode reduzir o tempo desta tarefa. Podemos revisar o resultado na sexta?”</div><small>Uma ideia, uma razão e um pedido claro.</small></div>
+ </div>
+</section>
+
+<section id="como-funciona" style="background:#F3EEE4">
+ <div class="wrap">
+  <div class="eyebrow">Como funciona</div>
+  <h2>Sua fala. Sua prática.<br><em>Meu acompanhamento.</em></h2>
+  <p class="lead">Em 15 dias, escolhemos uma prioridade. Você pratica, recebe feedback e enxerga o que mudou.</p>
+  <div class="steps">
+   <div class="step" style="--k:var(--amber)"><div class="n">01</div><div class="t">ANTES DE COMEÇAR</div><h3>Eu entendo o seu objetivo</h3><p>Você preenche o formulário de interesse. Eu analiso e falo com você pelo WhatsApp para combinar tudo.</p></div>
+   <div class="step" style="--k:var(--coral)"><div class="n">02</div><div class="t">PRIMEIRO ENCONTRO</div><h3>Um ponto de partida claro</h3><p>Assistimos ao seu vídeo inicial e montamos um plano de prática para a sua situação.</p></div>
+   <div class="step" style="--k:var(--violet)"><div class="n">03</div><div class="t">ENTRE OS ENCONTROS</div><h3>Treino com direção</h3><p>Você ensaia uma tarefa e recebe orientações, com rodadas de dúvidas durante o ciclo.</p></div>
+   <div class="step" style="--k:var(--green)"><div class="n">04</div><div class="t">FIM DOS 15 DIAS</div><h3>Comparação e próximos passos</h3><p>Revisamos o vídeo final, comparamos com o início e definimos o que ainda merece atenção.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="dark">
+ <div class="wrap">
+  <div class="eyebrow">O que você recebe</div>
+  <h2>Acompanhamento <em>individual, de verdade.</em></h2>
+  <p class="lead">O seu objetivo orienta os encontros e as tarefas. O foco fica naquilo que você precisa comunicar.</p>
+  <div class="gets">
+   <div class="get"><div class="ic">🎥</div><div><h3>2 encontros ao vivo de 45 minutos</h3><p>Chamadas individuais por Google Meet, com orientação e simulações da sua situação.</p><span class="tag">AO VIVO</span></div></div>
+   <div class="get"><div class="ic">📊</div><div><h3>2 análises dos seus vídeos</h3><p>Um vídeo inicial e um final, de até 3 minutos cada, com observações e ajustes.</p><span class="tag">FEEDBACK</span></div></div>
+   <div class="get"><div class="ic">🎯</div><div><h3>Um plano para a sua prioridade</h3><p>Uma tarefa ligada ao seu contexto: prática de 10 minutos, quatro dias por semana.</p><span class="tag">APLICAÇÃO</span></div></div>
+   <div class="get"><div class="ic">💬</div><div><h3>Apoio durante 15 dias</h3><p>Rodadas de dúvidas pelo WhatsApp, com retorno em até 2 dias úteis.</p><span class="tag">ACOMPANHAMENTO</span></div></div>
+  </div>
+ </div>
+</section>
+
+<section id="sobre">
+ <div class="wrap">
+  <div class="about">
+   <div class="avatar"><div class="mic"><svg viewBox="0 0 64 64"><rect x="22" y="6" width="20" height="32" rx="10" fill="currentColor"/><path d="M14 30a18 18 0 0 0 36 0" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round"/><line x1="32" y1="48" x2="32" y2="58" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></div><b style="font-family:Poppins;font-size:22px">Vinícius Vieira</b><span style="color:var(--amber);font-size:14px">@viniciusvieirafala</span><img src="foto.jpg" alt="Vinícius Vieira" onerror="this.remove()"></div>
+   <div>
+    <div class="eyebrow">Quem vai acompanhar você</div>
+    <h2>Prazer, <em>Vinícius Vieira.</em></h2>
+    <p><b>Ex-tímido.</b> Professor de música, líder de vendas e palestrante. Conheço o desafio de se posicionar — e hoje uso a comunicação para ensinar, liderar pessoas e apresentar minhas ideias.</p>
+    <p>Sou professor de saxofone e música, com experiência didática com crianças e pessoas autistas. Essa vivência reforça o meu cuidado com os diferentes ritmos de aprendizagem.</p>
+    <div class="creds">
+     <div class="cred">🎓<div>Administração e Marketing na <b>PUC-Campinas</b></div></div>
+     <div class="cred">🏆<div>Comunicação e oratória na <b>Vox2You</b></div></div>
+     <div class="cred">🎤<div>Cursos com jornalistas e palestrantes como <b>Eduardo Brambilla</b> e <b>Polozi</b></div></div>
+     <div class="cred">💼<div>Líder de vendas e diretor da <b>Casa das Organistas</b>, com mais de R$ 1 milhão em vendas</div></div>
+    </div>
+    <div class="note"><b>Meu foco é educacional.</b> A mentoria trabalha comunicação e oratória. Não sou fonoaudiólogo: questões clínicas de voz e fala precisam de acompanhamento de profissionais habilitados.</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="interesse" class="dark">
+ <div class="narrow">
+  <div class="eyebrow">Seu primeiro passo</div>
+  <h2>Quero conhecer <em>o seu desafio.</em></h2>
+  <p class="lead">Conte um pouco sobre você e a comunicação que quer desenvolver. Eu leio cada resposta e entro em contato pelo WhatsApp com todos os detalhes.</p>
+  <div class="flow3"><div><b>01</b>Você preenche o formulário.</div><div><b>02</b>Eu analiso o seu objetivo.</div><div><b>03</b>Conversamos pelo WhatsApp.</div></div>
+
+  <div class="form-wrap">
+   <form action="https://formsubmit.co/65b4ccc7ebc1e5e309c68dc9f52e3b10" method="POST">
+    <input type="hidden" name="_subject" value="Novo interessado | Mentoria Vinícius Vieira Fala">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://mentoria.viniciusvieirafala.com.br/obrigado.html">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+    <fieldset class="fs"><legend>01 / SOBRE VOCÊ</legend>
+     <label for="nome">Seu nome *</label><input id="nome" type="text" name="nome" required>
+     <label for="idade">Sua idade *</label><input id="idade" type="number" name="idade" min="10" max="100" required>
+     <label for="whatsapp">WhatsApp com DDD *</label><input id="whatsapp" type="tel" name="whatsapp" placeholder="(19) 99999-9999" required>
+     <p class="hint">É por este número que vou falar com você. Se estiver fora do Brasil, inclua o código do país.</p>
+    </fieldset>
+
+    <fieldset class="fs"><legend>02 / SUA COMUNICAÇÃO</legend>
+     <label for="exp">Qual é a sua experiência com comunicação? *</label><textarea id="exp" name="experiencia_comunicacao" placeholder="Conte se costuma falar em reuniões, vender, apresentar trabalhos, gravar vídeos…" required></textarea>
+     <label for="est">Você já estudou comunicação ou oratória? *</label>
+     <select id="est" name="estudos_comunicacao" required><option value="">Selecione uma opção</option><option>Não estudei ainda</option><option>Estudo por conta própria</option><option>Fiz curso ou estudei em uma escola</option><option>Estou fazendo um curso atualmente</option></select>
+     <label for="cursos">Quais escolas, cursos ou estudos você fez?</label><textarea id="cursos" name="escolas_cursos_estudos" placeholder="Se já estudou, conte onde e o que aprendeu."></textarea>
+     <label for="dif">Qual é a sua principal dificuldade na comunicação? *</label><textarea id="dif" name="principal_dificuldade" placeholder="Descreva uma situação real que você quer melhorar e o que acontece hoje." required></textarea>
+    </fieldset>
+
+    <fieldset class="fs"><legend>03 / SEU COMPROMISSO</legend>
+     <label for="tempo">Quanto tempo você tem por dia para treinar? *</label>
+     <select id="tempo" name="tempo_diario_treino" required><option value="">Selecione o tempo disponível</option><option>Até 5 minutos</option><option>De 5 a 10 minutos</option><option>De 10 a 20 minutos</option><option>De 20 a 30 minutos</option><option>Mais de 30 minutos</option><option>Ainda não tenho um horário definido</option></select>
+     <label for="disp">De 0 a 10, o quanto você está disposto(a) a desenvolver sua comunicação agora? *</label>
+     <select id="disp" name="disposicao" required><option value="">Escolha uma nota de 0 a 10</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+    </fieldset>
+
+    <label class="check"><input type="checkbox" name="autorizacao_contato" value="Sim" required> Autorizo o uso destas respostas para que o Vinícius analise o meu interesse e entre em contato pelo WhatsApp sobre a mentoria. *</label>
+    <button class="btn" type="submit">Enviar meu interesse ↗</button>
+    <p class="small">* Campos obrigatórios. As respostas são enviadas por e-mail ao Vinícius pelo FormSubmit e não autorizam publicação de vídeos ou depoimentos.</p>
+   </form>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="narrow">
+  <div class="eyebrow">Antes de começar</div>
+  <h2>Suas dúvidas, <em>com clareza.</em></h2>
+  <details><summary>Para quem é essa mentoria?</summary><p>Para pessoas a partir dos 16 anos que querem falar com mais clareza e segurança em situações reais: trabalho, faculdade, vendas, apresentações ou conversas importantes.</p></details>
+  <details><summary>Preencher o formulário já me inscreve?</summary><p>Não. O formulário é para eu conhecer o seu objetivo. Depois eu entro em contato pelo WhatsApp com todos os detalhes, inclusive valores e datas, e você decide sem compromisso.</p></details>
+  <details><summary>Como acontecem os encontros?</summary><p>São chamadas individuais pelo Google Meet, em horários combinados com você. Entre os encontros, você treina e me manda as suas dúvidas pelo WhatsApp.</p></details>
+  <details><summary>Preciso dar depoimento ou autorizar meus vídeos?</summary><p>Não. Depoimento e autorização para publicar vídeos são sempre opcionais.</p></details>
+  <details><summary>É curso gravado ou atendimento de fonoaudiologia?</summary><p>Nenhum dos dois. É um acompanhamento individual e ao vivo de comunicação e oratória. Questões clínicas de voz e fala precisam de um fonoaudiólogo.</p></details>
+  <details><summary>Você garante que eu vou convencer as pessoas?</summary><p>Ninguém pode garantir isso. O que eu garanto é método, prática direcionada e feedback sincero. O resultado depende do seu ponto de partida e do seu treino.</p></details>
+  <div style="text-align:center;margin-top:30px"><a class="btn" href="#interesse">Quero preencher o formulário</a></div>
+ </div>
+</section>
+
+<footer><p><b style="color:#fff;font-family:Poppins">vinícius vieira <span style="color:var(--amber)">fala.</span></b></p><p style="margin-top:6px"><a href="https://www.instagram.com/viniciusvieirafala/">@viniciusvieirafala ↗</a> · <a href="https://vip.viniciusvieirafala.com.br">todos os links</a></p></footer>
+</body>
+</html>
